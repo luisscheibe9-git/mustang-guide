@@ -1574,6 +1574,414 @@ const RESOURCES = [
     note: "\"I wish I went [to] counseling services much sooner.\" — r/CalPoly, July 2019."
   },
 
+  // ---------------- Notable Project Teams & Clubs ----------------
+  {
+    title: "Cal Poly Racing (SAE)",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "The largest SAE International student chapter in California — fields both Baja SAE (off-road) and Formula SAE/Formula Electric teams that compete internationally.",
+    cost: "Free",
+    link: "https://www.calpolyracing.org/",
+    note: "120+ members; Formula IC placed 6th overall in 2023."
+  },
+  {
+    title: "Rose Float",
+    category: "Clubs & Community",
+    tags: ["community", "arts"],
+    desc: "An ASI-funded program where students design and build Cal Poly's entry in the Tournament of Roses Parade jointly with Cal Poly Pomona — a tradition since 1949.",
+    cost: "Free",
+    link: "https://www.asi.calpoly.edu/get-involved/rose-float/",
+    note: "Draws roughly 200,000 in-person spectators and ~500 million TV viewers each year."
+  },
+  {
+    title: "PolySat / Cal Poly CubeSat Lab",
+    category: "Clubs & Community",
+    tags: ["community", "tech", "career"],
+    desc: "Student-run research lab that co-created the CubeSat standard with Stanford in 1999, now used by hundreds of organizations worldwide. Students handle full satellite lifecycle — design, build, test, launch.",
+    cost: "Free",
+    link: "https://www.polysat.org/apply",
+    note: "No prior experience required to apply."
+  },
+  {
+    title: "Cal Poly Space Systems (Rocketry)",
+    category: "Clubs & Community",
+    tags: ["community", "tech"],
+    desc: "Rocketry club open to all majors — built Cal Poly's first club-developed liquid bipropellant rocket engine, plus solid-motor competition rockets, entirely student-designed and operated.",
+    cost: "Free",
+    link: "https://aero.calpoly.edu/cpss/",
+    note: null
+  },
+  {
+    title: "Design/Build/Fly",
+    category: "Clubs & Community",
+    tags: ["community", "tech"],
+    desc: "Aerospace club that designs, builds, and flies remote-control aircraft for the international SAE Aero Design West competition against roughly 75 other teams.",
+    cost: "Free",
+    link: "https://aero.calpoly.edu/dbf/",
+    note: null
+  },
+  {
+    title: "Cal Poly Robotics Club",
+    category: "Clubs & Community",
+    tags: ["community", "tech"],
+    desc: "Multidisciplinary club based in the Bonderson Projects Building, building robots for the annual Roborodentia competition.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Human Powered Vehicle (HPV) Club",
+    category: "Clubs & Community",
+    tags: ["community", "outdoors"],
+    desc: "Founded in 1977, one of Cal Poly's oldest competitive engineering teams — builds aerodynamic speed bikes and hit 50.08 mph at the World Human Powered Speed Challenge in fall 2025.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Supermileage",
+    category: "Clubs & Community",
+    tags: ["community", "tech"],
+    desc: "Multidisciplinary team designing hyper-efficient gas and electric vehicles for mileage competitions.",
+    cost: "Free",
+    link: "https://supermileage.calpoly.edu/",
+    note: null
+  },
+  {
+    title: "Society of Civil Engineers (SCE)",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "250+ member chapter that won the ASCE Robert Ridgway Student Chapter Award in May 2026 — Cal Poly's 8th win of this national top-chapter award. Runs the Concrete Canoe and Steel Bridge project teams.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Society of Women Engineers (SWE)",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "400+ members; Gold-level Outstanding Student Section nationally since 2010. Won Boeing's Team Tech national competition multiple years, including 1st place in 2022.",
+    cost: "Free",
+    link: "https://wep.calpoly.edu/cal-poly-society-women-engineers-awards",
+    note: null
+  },
+  {
+    title: "SHPE Cal Poly",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "Society of Hispanic Professional Engineers chapter established 1978 — one of the largest multicultural orgs on campus, named Outstanding Chapter of the Year 6 of the last 10 years.",
+    cost: "Free",
+    link: "http://shpe.calpoly.edu/about.html",
+    note: null
+  },
+  {
+    title: "NSBE Cal Poly",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "National Society of Black Engineers chapter, established 1974 — works to increase the number of Black engineers who excel academically and professionally.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Entrepreneurs",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "Student-run org providing workshops, mentorship, and weekly meetings for aspiring founders across all majors, affiliated with the campus Center for Innovation & Entrepreneurship.",
+    cost: "Free",
+    link: "https://calpolyentrepreneurs.com/",
+    note: "Weekly meetings, Tuesdays, Bldg 03 Business Silo."
+  },
+  {
+    title: "Cal Poly Investing Club",
+    category: "Clubs & Community",
+    tags: ["community", "career"],
+    desc: "Founded 2013 — weekly meetings covering equity analysis, real estate, crypto, and startups, open to all years and majors.",
+    cost: "Free",
+    link: "https://www.calpolyinvesting.club/",
+    note: null
+  },
+  {
+    title: "Cal Poly STUNT Team",
+    category: "Clubs & Community",
+    tags: ["community", "fitness"],
+    desc: "Competes in STUNT, a partner-stunt/tumbling sport recently approved by the NCAA as an emerging women's sport. Won the 2023 national championship as a #3 seed, upsetting top-seeded Oklahoma State twice in overtime.",
+    cost: "Free",
+    link: null,
+    note: "Not a varsity/scholarship sport at Cal Poly despite the national title."
+  },
+
+  // ---------------- College-Specific Resources ----------------
+  {
+    title: "CAFES Advising Center",
+    category: "Academic & Career Help",
+    tags: ["academic", "free"],
+    desc: "Advising specifically for Agriculture, Food & Environmental Sciences students (Bldg 80-M) — serves transfer and 2nd-year+ students. Also runs the Multicultural Agriculture Program (MAP): peer mentoring, quarterly workshops, and career events.",
+    cost: "Free",
+    link: "https://cafes.calpoly.edu/student-services/academic-advising",
+    note: "1st-years use the university-wide Mustang Success Center instead."
+  },
+  {
+    title: "CLA Advising Center",
+    category: "Academic & Career Help",
+    tags: ["academic", "free"],
+    desc: "Advising for Liberal Arts students (Bldg 47, Rm 36R) with Zoom drop-ins and peer advisors. Also partners with College Possible Catalyze for near-peer success coaching, with a stated focus on men of color.",
+    cost: "Free",
+    link: "https://cla.calpoly.edu/advising",
+    note: "Drop-ins: M–Tu 10–noon, W–Th 2–4pm."
+  },
+  {
+    title: "CAED Advising Center",
+    category: "Academic & Career Help",
+    tags: ["academic", "free"],
+    desc: "Open-door advising (Bldg 05, Rm 210, M–F 9am–4pm) for all 5 CAED majors, plus a peer-mentoring \"Buddy Program\" for belonging and connection.",
+    cost: "Free",
+    link: "https://caed.calpoly.edu/caed-advising",
+    note: null
+  },
+  {
+    title: "Disability Resource Center (DRC)",
+    category: "Wellness & Basic Needs",
+    tags: ["wellness", "academic", "free"],
+    desc: "Handles accommodations: alternative media and notetaking, test accommodations, extended due dates, reduced course load, assistive technology, sign language interpreting, housing/dining accommodations, and a Strategic Coaching Program.",
+    cost: "Free",
+    link: "https://drc.calpoly.edu/content/drc-services",
+    note: "Building 124. Requests go through an intake appointment via the My Cal Poly Portal — accommodations can't be retroactive, so start early."
+  },
+  {
+    title: "Scholarship QuickLink",
+    category: "Academic & Career Help",
+    tags: ["academic", "free"],
+    desc: "Cal Poly's actual scholarship mechanism — continuing students apply each March through a tool inside the My Cal Poly Portal, matched largely by college/major. New students are auto-considered on admission.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Textbook Rental & Buyback (El Corral)",
+    category: "Academic & Career Help",
+    tags: ["academic", "free"],
+    desc: "The campus bookstore offers textbook rentals typically under half the new price, plus an end-of-term buyback program for cash or store credit.",
+    cost: "$",
+    link: null,
+    note: null
+  },
+  {
+    title: "CashCourse",
+    category: "Academic & Career Help",
+    tags: ["academic", "free"],
+    desc: "Free financial-literacy platform through Campus Health & Wellbeing — budgeting tools, calculators, and quizzes.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Frost Summer Undergraduate Research Program",
+    category: "Academic & Career Help",
+    tags: ["academic", "career"],
+    desc: "Funded by the $110M Bill & Linda Frost gift. Frost Research Scholars get a $10,000 scholarship including a guaranteed $4,500 SURP stipend for summer research.",
+    cost: "Free",
+    link: null,
+    note: "Cal Poly-wide, more than 1,200 students are paid roughly $1.4 million annually for research work."
+  },
+  {
+    title: "LSAMP Research Scholars Program",
+    category: "Academic & Career Help",
+    tags: ["academic", "career"],
+    desc: "A $4,000 stipend for Winter/Spring quarter research with a Cal Poly faculty mentor, for LSAMP-eligible (generally underrepresented STEM) students.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Study Abroad / International Center",
+    category: "Academic & Career Help",
+    tags: ["academic", "travel"],
+    desc: "Multiple program tracks — faculty-led Global Programs, bilateral exchanges, third-party Partner Programs, CSU International Programs, and National Student Exchange (a ~200-school US/Canada/territories consortium). \"First Year GO\" is an entry-level option for freshmen.",
+    cost: "$$",
+    link: "https://abroad.calpoly.edu/",
+    note: "Library Bldg 35, Rm 319. Structured Plan → Find → Apply → Pre-Departure process with peer advisors."
+  },
+
+  // ---------------- More Transportation ----------------
+  {
+    title: "Zipcar at Cal Poly",
+    category: "Transportation",
+    tags: ["travel"],
+    desc: "9 Zipcars parked at campus locations including the Grand Ave Parking Structure — gas, insurance, and maintenance included.",
+    cost: "$",
+    link: "https://afd.calpoly.edu/parking/slo/commuting-to-campus/zipcar",
+    note: "$25/year student membership; rates from $8.75/hour or $72/day. Ages 18–20 get campus-only access; 21+ get nationwide access."
+  },
+
+  // ---------------- More Discounts ----------------
+  {
+    title: "Foothill Cyclery Student Discount",
+    category: "Discounts & Deals",
+    tags: ["outdoors"],
+    desc: "10% off all parts and accessories for Cal Poly and Cuesta students — just give them your school email.",
+    cost: "Discount",
+    link: "https://www.foothillcyclery.com/students",
+    note: null
+  },
+  {
+    title: "SLO Beauty College",
+    category: "Discounts & Deals",
+    tags: ["wellness"],
+    desc: "A student-run cosmetology school with genuinely cheap services: $8 haircuts, $8 manicures, $15 pedicures, $25 facials.",
+    cost: "$",
+    link: "https://slobeautycollege.com/salon-services/",
+    note: "Not a student-specific discount — just cheap for everyone."
+  },
+  {
+    title: "Palm Theatre Student Thursdays",
+    category: "Discounts & Deals",
+    tags: ["arts"],
+    desc: "$10 student tickets on Thursdays at the Palm Theatre / SLO Film Center (general is $12 after 5pm).",
+    cost: "Discount",
+    link: "https://thepalmtheatre.com/faq-and-accessibility/",
+    note: "Also has a $9 Bargain Monday for everyone."
+  },
+  {
+    title: "BA Start Arcade & Taproom",
+    category: "Discounts & Deals",
+    tags: ["social"],
+    desc: "50+ retro and modern arcade games plus pool and pinball downtown — no cover charge, $3 draft beers.",
+    cost: "$",
+    link: "https://www.bastartarcadebar.com/",
+    note: "21+ after 9pm Thu–Sat."
+  },
+  {
+    title: "History Center of SLO County",
+    category: "Discounts & Deals",
+    tags: ["arts", "free"],
+    desc: "Always-free admission (suggested donation) on Monterey St.",
+    cost: "Free",
+    link: "https://www.historycenterslo.org/",
+    note: null
+  },
+  {
+    title: "1901 Marketplace",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "A newer (2024) on-campus dining hub with 8 venues under one roof: 1901 Kitchen, Chick-fil-A, Panda Express, Pico's, PolyChoice, Pom & Honey, Red Radish, and Shake Smart.",
+    cost: "$",
+    link: null,
+    note: "Recent enough that some students still don't know it exists."
+  },
+
+  // ---------------- More Outdoors & Hikes ----------------
+  {
+    title: "Righetti Hill Open Space",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A brand-new open space (opened May 2025) — 51 acres, 2+ miles of trails, and a Quarry Trail to a 563-ft summit with 360° views of Cerro San Luis, Bishop Peak, and Islay Hill.",
+    cost: "Free",
+    link: null,
+    note: "Genuinely new enough that most current students don't know about it yet. Trailhead at Hillside Dr & Twin Creek Rd."
+  },
+  {
+    title: "Irish Hills Natural Reserve",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "720 acres and 8+ miles of trails — the Morro View Trail is 3.15 miles round trip with 850 ft of gain from the Prefumo Canyon trailhead.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cerro Cabrillo",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A 2.3-mile out-and-back near Morro Bay with a steep rock-scramble finish and 360° views. Trailhead on South Bay Blvd across from the Morro Estuary.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Eagle Rock Nature Trail",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A 2.4-mile loop in El Chorro Regional Park, about 450 ft of gain and an hour round trip, past the botanical garden and dog park.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cuesta Ridge Botanical Area",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A 6-mile round trip through a rare Sargent cypress \"elfin forest\" with views of 8 of the Nine Sisters — best in May–June for wildflowers.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Bob Jones Trail (\"City to the Sea\")",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A paved, flat, family-friendly trail — about 6 miles round trip from Ontario Rd to the Avila Beach Promenade along SLO Creek.",
+    cost: "Free",
+    link: null,
+    note: "The easiest option on this whole list if you just want a flat walk or bike ride."
+  },
+  {
+    title: "Pecho Coast Trail → Point San Luis Lighthouse",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "travel"],
+    desc: "A 3.75-mile round trip, moderate to strenuous — but guided-only via PG&E docents, Wednesdays and Saturdays.",
+    cost: "$",
+    link: "https://www.pointsanluislighthouse.org/hiking",
+    note: "Reserve at least 2 weeks ahead (805-528-8758). Optional $10 lighthouse tour add-on."
+  },
+  {
+    title: "Elfin Forest Natural Preserve",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A 1-mile ADA-accessible boardwalk loop in Los Osos, only 80 ft of gain, with views of Morro Bay, Hollister Peak, and Cerro Cabrillo.",
+    cost: "Free",
+    link: null,
+    note: "The most accessible hike on this list — genuinely wheelchair-friendly."
+  },
+  {
+    title: "Laguna Lake Park",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A 375-acre park with options from an easy 2.3-mile loop up to a strenuous connector all the way to the Cerro San Luis summit. Off-leash dog park on site.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+
+  // ---------------- Real Talk additions ----------------
+  {
+    title: "E-Scooters: They Don't Exist Here",
+    category: "Real Talk: Skip It",
+    tags: ["travel"],
+    desc: "Don't waste time looking for Lime or Bird — SLO has repeatedly and explicitly blocked dockless e-scooter companies from operating in the city (most recently reported again in 2023).",
+    cost: "Free",
+    link: null,
+    note: "A 2019 city-approved bike-share pilot also never actually launched."
+  },
+  {
+    title: "Hollister Peak: You Can't Hike This One",
+    category: "Real Talk: Skip It",
+    tags: ["outdoors"],
+    desc: "It looks like an obvious hike from the highway, but Hollister Peak is private property with no legal public access — only occasional docent-led hikes via The Land Conservancy.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Downtown Centre Cinema — Currently Closed",
+    category: "Real Talk: Skip It",
+    tags: ["arts"],
+    desc: "The historic $6 Discount Tuesday / $10 Sunday College Night deals are real, but the theater has been closed for renovation since early 2026 — don't show up expecting it to be open.",
+    cost: "Free",
+    link: null,
+    note: "Reportedly expected to reopen around the holidays in 2026 — verify before planning around it."
+  },
+
   // ---------------- More Hidden Gems (Instagram / LocalWiki / KCPR) ----------------
   {
     title: "@slo.underground — Free All-Ages Local Shows",
