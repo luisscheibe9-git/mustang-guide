@@ -142,9 +142,16 @@ h1 {
 }
 .stats b { color: var(--gold); font-variant-numeric: tabular-nums; }
 
+.hero-links {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.hero-links-sep { width: 1px; height: 14px; background: rgba(255, 255, 255, 0.3); }
 .suggest-link {
   display: inline-block;
-  margin-top: 18px;
   font-size: 13px;
   font-weight: 600;
   color: #fff;
@@ -155,6 +162,7 @@ h1 {
   animation: fadeUp 0.5s ease 0.5s forwards;
 }
 .suggest-link:hover { color: var(--gold); }
+.hero-btn-reset { background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
 
 /* ---------- Filter bar ---------- */
 main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
@@ -196,6 +204,10 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   color: #fff;
 }
 .clear-chip { margin-left: auto; background: transparent; border-color: transparent; color: var(--text-dim); text-decoration: underline; }
+.bucket-nav-btn { border-color: var(--gold); color: var(--gold-dark); }
+.bucket-nav-btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+.bucket-nav-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
+#bucket-nav-count { font-variant-numeric: tabular-nums; opacity: 0.85; }
 
 /* ---------- Cost slider ---------- */
 .cost-slider-group { gap: 10px; }
@@ -393,7 +405,23 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   box-shadow: 0 4px 16px -6px rgba(21, 71, 52, 0.25);
 }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card-title-row { display: flex; align-items: center; gap: 7px; min-width: 0; }
 .card h3 { margin: 0; font-size: 16px; line-height: 1.3; font-family: var(--font-body); font-weight: 700; color: var(--text); }
+.card-done-badge {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card.card-done { border-left-color: var(--green-bright); }
+.card.card-done p { opacity: 0.75; }
 .cost-badge {
   font-size: 11px;
   font-weight: 700;
@@ -418,6 +446,37 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   border-radius: 4px;
 }
 .card:hover .tag-pill { border-color: var(--gold); color: var(--gold-dark); }
+
+/* ---------- Bucket list ---------- */
+.bucket-section { margin-bottom: 46px; }
+.bucket-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--green);
+}
+.bucket-section-head h2 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.bucket-progress-label { color: var(--text-dim); font-size: 14px; font-weight: 600; }
+.bucket-section-sub { color: var(--text-dim); font-size: 14px; margin: 12px 0 0; }
+.bucket-progress-bar {
+  margin-top: 12px;
+  height: 8px;
+  border-radius: 20px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.bucket-progress-fill { height: 100%; background: var(--gold); border-radius: 20px; transition: width 0.3s ease; }
 
 /* ---------- Empty state ---------- */
 .empty-state {
@@ -489,6 +548,32 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   border: 1px solid var(--green);
 }
 .modal .btn-link-alt:hover { background: var(--bg-alt); }
+.modal .modal-bucket-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.modal .btn-bucket, .modal .btn-bucket-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.modal .btn-bucket:hover, .modal .btn-bucket-outline:hover { border-color: var(--gold); color: var(--gold-dark); }
+.modal .btn-bucket.active { background: var(--green-bright); border-color: var(--green-bright); color: #fff; }
+.modal .btn-bucket-outline.active { background: var(--gold); border-color: var(--gold); color: #fff; }
 
 /* ---------- Back to top ---------- */
 #back-to-top {
