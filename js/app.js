@@ -7,6 +7,26 @@
     cost: "all"
   };
 
+  const CATEGORY_ICONS = {
+    "Campus Rentals & Gear": "\u{1F392}",
+    "Recreation & Fitness": "\u{1F3CB}️",
+    "Academic & Career Help": "\u{1F393}",
+    "Wellness & Basic Needs": "\u{1F49A}",
+    "Creative & Maker Spaces": "\u{1F3A8}",
+    "Discounts & Deals": "\u{1F3F7}️",
+    "Happy Hour (21+)": "\u{1F37B}",
+    "Transportation": "\u{1F68C}",
+    "Clubs & Community": "\u{1F91D}",
+    "Outdoors & Hikes": "\u{1F97E}",
+    "Hidden Gems (Community Intel)": "\u{1F48E}",
+    "Food & Local Spots": "\u{1F37D}️",
+    "Local Food Finds (Community Intel)": "\u{1F35C}",
+    "Day Trips & Traditions": "\u{1F697}",
+    "Real Talk: Skip It": "⚠️",
+    "Know Before You Register": "\u{1F4CB}",
+    "Freshman Regrets & Underused Benefits": "\u{1F9ED}"
+  };
+
   function costClass(cost) {
     if (cost === "Free") return "free";
     if (cost === "$") return "cheap";
@@ -59,6 +79,7 @@
     const orderedCats = CATEGORY_ORDER.filter((c) => byCategory.has(c))
       .concat([...byCategory.keys()].filter((c) => !CATEGORY_ORDER.includes(c)));
 
+    let cardIndex = 0;
     orderedCats.forEach((cat) => {
       const items = byCategory.get(cat);
       const id = slugify(cat);
@@ -72,9 +93,10 @@
       section.className = "section";
       section.id = id;
 
+      const icon = CATEGORY_ICONS[cat] || "\u{1F4CC}";
       const head = document.createElement("div");
       head.className = "section-head";
-      head.innerHTML = `<h2>${cat}</h2><span class="section-count">${items.length}</span>`;
+      head.innerHTML = `<h2><span class="section-icon">${icon}</span>${cat}</h2><span class="section-count">${items.length}</span>`;
       section.appendChild(head);
 
       const grid = document.createElement("div");
@@ -83,6 +105,7 @@
       items.forEach((item) => {
         const card = document.createElement("div");
         card.className = "card";
+        card.style.setProperty("--i", Math.min(cardIndex++, 24));
         card.innerHTML = `
           <div class="card-top">
             <h3>${item.title}</h3>
@@ -166,6 +189,14 @@
     document.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
     document.querySelector('.cost-chip[data-cost="all"]').classList.add("active");
     render();
+  });
+
+  const backToTop = document.getElementById("back-to-top");
+  window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("visible", window.scrollY > 600);
+  });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   renderInterestChips();

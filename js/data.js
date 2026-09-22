@@ -16,11 +16,17 @@ const CATEGORY_ORDER = [
   "Wellness & Basic Needs",
   "Creative & Maker Spaces",
   "Discounts & Deals",
+  "Happy Hour (21+)",
   "Transportation",
   "Clubs & Community",
   "Outdoors & Hikes",
+  "Hidden Gems (Community Intel)",
   "Food & Local Spots",
-  "Day Trips & Traditions"
+  "Local Food Finds (Community Intel)",
+  "Day Trips & Traditions",
+  "Real Talk: Skip It",
+  "Know Before You Register",
+  "Freshman Regrets & Underused Benefits"
 ];
 
 const INTERESTS = [
@@ -64,7 +70,7 @@ const RESOURCES = [
     desc: "Free bike tune-ups, tube/cable changes, and brake bleeds from a mobile repair unit that visits Dexter Lawn and UU Plaza, weeks 2–10 each quarter.",
     cost: "Free",
     link: "https://www.asi.calpoly.edu/asi-now/asi-blog/get-your-bike-fixed-for-free/",
-    note: "Just drop by during posted hours — no appointment needed."
+    note: "Just drop by during posted hours — no appointment needed. One r/CalPoly student said this saved them a $60 repair quote in town."
   },
 
   // ---------------- Recreation & Fitness ----------------
@@ -277,7 +283,7 @@ const RESOURCES = [
     desc: "Open-access pantry with packaged and fresh food, hygiene items, and menstrual products — no eligibility screening, no proof required.",
     cost: "Free",
     link: "https://basicneeds.calpoly.edu/foodpantry",
-    note: "M–F 8:30am–6pm, ground level of the Health Center."
+    note: "M–F 8:30am–6pm, ground level of the Health Center. It's genuinely for everyone, not just students with financial need — a common misconception on r/CalPoly."
   },
   {
     title: "CalFresh Outreach",
@@ -304,7 +310,7 @@ const RESOURCES = [
     desc: "Free clothing, kitchenware, household items, and school supplies, run by Green Campus out of Cal Poly Surplus.",
     cost: "Free",
     link: "https://afd.calpoly.edu/sustainability/student/swap-n-shops",
-    note: "Building 82. Genuinely underused per student press coverage."
+    note: "Building 82, off Mt. Bishop Rd. It's a recurring pop-up rather than a permanent store — 65 visitors showed up by the midpoint of its spring 2026 opening day, per Mustang News. Watch for the next opening announcement."
   },
 
   // ---------------- Creative & Maker Spaces ----------------
@@ -575,7 +581,7 @@ const RESOURCES = [
     desc: "3.8-mile route behind Poly Canyon leading to a literal swing with one of the best views of campus and SLO.",
     cost: "Free",
     link: null,
-    note: null
+    note: "A favorite sunset photography spot per r/CalPoly — bring water, the last stretch with gear in hand is a real climb."
   },
   {
     title: "Reservoir Canyon Falls",
@@ -620,7 +626,7 @@ const RESOURCES = [
     desc: "A small beach reached by a dirt trail, with a sea cave and tide pools — clothing-optional, and genuinely dangerous at high tide.",
     cost: "Free",
     link: null,
-    note: "No restrooms. Check tide times before you go."
+    note: "No restrooms. Check tide times before you go. Not the move for a private date — r/CalPoly warns the cave gets crowded and smelly; try Shell Beach instead for that."
   },
   {
     title: "Poly Canyon / Architecture Graveyard",
@@ -629,7 +635,7 @@ const RESOURCES = [
     desc: "A roughly 3-mile round trip into a 9-acre outdoor lab of ~20 decades-old student-built experimental structures, dating to 1964.",
     cost: "Free",
     link: "https://polycanyon.calpoly.edu/history",
-    note: null
+    note: "One r/CalPoly student admitted they went their whole time at Cal Poly without visiting — don't be that person. Bring a picnic."
   },
   {
     title: "Avila Beach",
@@ -811,7 +817,7 @@ const RESOURCES = [
     desc: "Acai bowls and brunch near the train station — doubles as one of the best study spots in town.",
     cost: "$",
     link: null,
-    note: null
+    note: "Some r/CalPoly students think it's overpriced for what you get — worth it for the vibe and the study space more than the food, per that discussion."
   },
   {
     title: "SloDoCo",
@@ -829,7 +835,7 @@ const RESOURCES = [
     desc: "SLO's first coffee shop — live music and local art on every wall.",
     cost: "$",
     link: null,
-    note: null
+    note: "The banana bread latte is the specific student-recommended order — enjoy it in the back garden/porch."
   },
 
   // ---------------- Day Trips & Traditions ----------------
@@ -931,5 +937,801 @@ const RESOURCES = [
     cost: "Free",
     link: null,
     note: null
+  },
+
+  // ---------------- Hidden Gems (Reddit Intel) ----------------
+  {
+    title: "Fischer Computer Lab",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["academic", "free", "tech"],
+    desc: "A quiet, rarely-crowded computer lab — one r/CalPoly regular admitted they're \"loathe to recommend this\" because they're usually the only one there.",
+    cost: "Free",
+    link: null,
+    note: "Classes sometimes use the room — check the schedule posted on the door. (r/CalPoly, Oct 2023)"
+  },
+  {
+    title: "Standing Desks: Building 186 & the UU Counters",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["academic", "free"],
+    desc: "Adjustable-height desks in Construction Innovation (Bldg 186, Room A215) when no class is meeting, plus standing counters throughout the University Union.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly standing-desk thread, Oct 2024."
+  },
+  {
+    title: "Empty Classroom Study Rotation",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["academic", "free"],
+    desc: "A finals-week trick from r/CalPoly: rotate through empty classrooms in Engineering IV, Frost, and Baker when you need a quiet room that isn't SloDoCo.",
+    cost: "Free",
+    link: null,
+    note: "\"I study best in an empty classroom.\" (r/CalPoly, March 2025)"
+  },
+  {
+    title: "Front Porch Free Coffee & Tea",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["academic", "free", "wellness"],
+    desc: "A volunteer-run coffee shop just off campus behind the Health Center — free tea, coffee, shared mugs, and quiet study seating.",
+    cost: "Free",
+    link: null,
+    note: "Also reportedly hosts free dinners midweek — confirm the current day before counting on it. (r/CalPoly, Feb 2025)"
+  },
+  {
+    title: "Cal Poly Scholars Study Space",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["academic", "free"],
+    desc: "A quiet study space in the science building available specifically to Cal Poly Scholars.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Sept 2024."
+  },
+  {
+    title: "Linnaea's Back Patio",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["academic", "food"],
+    desc: "The specific reason to pick Linnaea's over other coffee shops, per r/CalPoly — the back patio, alongside the downtown library and Santa Rosa Park as other quiet off-campus options.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Oct 2021."
+  },
+  {
+    title: "Cal Poly Arboretum",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "free"],
+    desc: "A genuinely overlooked green space on campus — one student posted they'd only just discovered it after years at Cal Poly.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Feb 2025."
+  },
+  {
+    title: "Kentwood Hill",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "free"],
+    desc: "A small, little-known hill behind the senior-living development off Orcutt Rd, accessed via the Kentwood dead end — recommended by a local photographer for sunset shots.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly photography thread, Jan 2024."
+  },
+  {
+    title: "Coon Creek Trail, Montaña de Oro",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "free"],
+    desc: "A hidden-gem trail within Montaña de Oro — six small bridges and very little elevation gain, good for a mellow hike.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, April 2024."
+  },
+  {
+    title: "Los Osos Oaks State Natural Reserve",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "free"],
+    desc: "A mostly-shaded, easier hike — a good pairing or alternative to a Montaña de Oro trip on a hot day.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, July 2025."
+  },
+  {
+    title: "Big Falls & Little Falls (behind Lopez Lake)",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors"],
+    desc: "Local swimming holes, repeatedly recommended on r/CalPoly — but access is genuinely difficult: creek crossings, poison oak, and a long, rough approach.",
+    cost: "Free",
+    link: null,
+    note: "Check current access conditions before you go — this isn't a casual outing. (r/CalPoly, April 2022 & 2025)"
+  },
+  {
+    title: "Point Buchon Trail",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "free"],
+    desc: "An unusual coastal trail through the old nuclear plant buffer zone, with views of the plant itself.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, June 2025."
+  },
+  {
+    title: "Margo Dodd Park, Shell Beach",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "free"],
+    desc: "A cliffside sunset viewpoint with a gazebo, recommended by a nearby resident as an underrated spot.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Aug 2024."
+  },
+  {
+    title: "Lampton Cliffs Beach, Cambria",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "travel", "free"],
+    desc: "A small, relatively secluded beach — pair it with a walk at nearby Fiscalini Ranch.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Aug 2024."
+  },
+  {
+    title: "Santa Margarita Lake Camping",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "social"],
+    desc: "Called a genuine \"hidden gem\" for camping, with good hiking nearby too.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, May 2025."
+  },
+  {
+    title: "Rancho El Chorro Camping",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["outdoors", "social"],
+    desc: "A pleasant, less-crowded camping spot recommended as an alternative to the busier sites.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, May 2025."
+  },
+  {
+    title: "Through Eyes of Glass (Stained Glass Classes)",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts", "social"],
+    desc: "A stained-glass studio on South Street offering date-night classes, and occasional brewery classes too.",
+    cost: "$$",
+    link: null,
+    note: "r/CalPoly date-ideas thread, Nov 2024."
+  },
+  {
+    title: "Morro Bay Batting Cages",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["social"],
+    desc: "An unusual, genuinely enjoyed date-night pick according to r/CalPoly — cheap, active, and different from the usual dinner-and-a-movie.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Nov 2024."
+  },
+
+  // ---------------- Local Food Finds (Reddit) ----------------
+  {
+    title: "Ebony Ethiopian Cuisine",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "Airport-area Ethiopian food, praised on r/CalPoly for vegan/gluten-free options and a lighter, less oily meal than most SLO food.",
+    cost: "$",
+    link: null,
+    note: "Limited opening days reported — call ahead. (r/CalPoly, Jan 2024)"
+  },
+  {
+    title: "Nautical Bean — Kitchen Sink Burrito",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "A specific breakfast burrito order the r/CalPoly food thread repeatedly points to.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Jan 2024."
+  },
+  {
+    title: "Shalimar",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "Tandoori chicken recommended as good but somewhat pricey — the Monday-night buffet takeout is the better value, per multiple commenters.",
+    cost: "$$",
+    link: null,
+    note: "A packed takeout container reportedly covers multiple meals. (r/CalPoly, Jan 2024 & Feb 2026)"
+  },
+  {
+    title: "My Friend Mike's / Thai Boat / Goshi",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "A local's grouped recommendation for pizza, Thai, and Japanese respectively.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Jan 2024."
+  },
+  {
+    title: "Spoon Trade / Sister Thai Food Truck (Grover Beach)",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food", "travel"],
+    desc: "Two Grover Beach spots students say are worth the short drive out of SLO.",
+    cost: "$$",
+    link: null,
+    note: "r/CalPoly, Jan 2024."
+  },
+  {
+    title: "Las Comadres, Santa Maria",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food", "travel"],
+    desc: "Salvadoran pupusas, praised as both excellent and inexpensive.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Jan 2024."
+  },
+  {
+    title: "Petra / Del's (Pismo) — Gluten-Free Pizza",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "Specific gluten-free pizza recommendations from students who actually need the option, not just a generic \"they probably have it.\"",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Jan 2024."
+  },
+  {
+    title: "G Brothers BBQ",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "BBQ sandwiches and chicken-fried steak, recommended in the same local food-finds thread.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly, Jan 2024."
+  },
+  {
+    title: "Noi's 2nd Street Café → Spooner's Cove",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food", "outdoors", "social"],
+    desc: "A specific, repeatable outing students recommend: grab Thai food from Noi's, then eat it at Spooner's Cove in Montaña de Oro.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly visitor-itinerary thread, July 2025."
+  },
+
+  // ---------------- Happy Hour (21+) ----------------
+  {
+    title: "There Does Not Exist — Sunday Kölsch",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$3.50 Kölsch, all day Sunday. No food available per reports, so eat first.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO happy hour thread, Aug 2026."
+  },
+  {
+    title: "Petra Happy Hour",
+    category: "Happy Hour (21+)",
+    tags: ["social", "food"],
+    desc: "$3–4 drafts, reportedly 3–6pm daily.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Firestone Grill — $4 Pints",
+    category: "Happy Hour (21+)",
+    tags: ["social", "food"],
+    desc: "$4 pints, Monday–Friday, 2–6pm.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Hoagies — $5 Beers",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$5 beers all day, every day — no happy-hour window needed.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "SLO Cider Happy Hour",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$6 happy-hour pints.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Beda's — 20% Off Beer",
+    category: "Happy Hour (21+)",
+    tags: ["social", "food"],
+    desc: "20% off beer 2–6pm, plus a dedicated happy-hour food menu.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Green Bottle — $2 Off Brews",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$2 off brews, 3–5pm.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Libertine — $1 Taco Tuesday",
+    category: "Happy Hour (21+)",
+    tags: ["social", "food"],
+    desc: "$1 tacos on Tuesdays.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Oak and Otter Happy Hour",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "Happy hour Monday–Friday 2–5pm, plus all day Sunday.",
+    cost: "Discount",
+    link: null,
+    note: "r/SLO, Aug 2026."
+  },
+
+  // ---------------- More Discounts (Reddit-Reported — verify before relying on) ----------------
+  {
+    title: "Old SLO BBQ — Student Discount",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "10% off with a student ID, per a recent r/CalPoly report.",
+    cost: "Discount",
+    link: null,
+    note: "Reported Aug 2025 — worth confirming it's still running before you count on it."
+  },
+  {
+    title: "High Street Deli — After 4:20pm",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "Discounted sandwiches late in the day — one commenter called it close to half off.",
+    cost: "Discount",
+    link: null,
+    note: "The daily special is reportedly excluded, and the window before closing is short — order ahead. (r/CalPoly, Feb 2026)"
+  },
+  {
+    title: "Sprouts — $5 Sandwiches & Wednesday Sushi",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "$5 sandwiches, plus a Wednesday sushi deal.",
+    cost: "Discount",
+    link: null,
+    note: "r/CalPoly, Feb 2026."
+  },
+  {
+    title: "Fatte's — Two-for-One Pizza",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "A reported two-for-one pizza deal.",
+    cost: "Discount",
+    link: null,
+    note: "r/CalPoly, Feb 2026 — confirm current terms."
+  },
+  {
+    title: "Eureka — Kids' Meal & Happy Hour",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "A $10 kids' burger/fries/drink combo ordered online, and separately a $13 burger-and-fries happy hour with $8.50 cocktails.",
+    cost: "Discount",
+    link: null,
+    note: "r/CalPoly, Aug 2025 & Feb 2026."
+  },
+  {
+    title: "Piadina / Hotel SLO Rooftop — Monday Pizza",
+    category: "Discounts & Deals",
+    tags: ["food", "social"],
+    desc: "A reported half-price (possibly BOGO) Monday pizza deal on the rooftop.",
+    cost: "Discount",
+    link: null,
+    note: "Reports differ on exact format between 2025 and 2026 — verify when you go. (r/CalPoly, Sept 2026)"
+  },
+  {
+    title: "SLOeats App Referral Code",
+    category: "Discounts & Deals",
+    tags: ["food", "tech"],
+    desc: "A student-shared referral code (FARMERS) reportedly unlocked a free month of premium and BOGO deals on the local food-ordering app SLOeats.",
+    cost: "Discount",
+    link: null,
+    note: "⚠️ Reported by students in 2023 — current validity unverified. Try it, but don't count on it."
+  },
+
+  // ---------------- Real Talk: Skip It ----------------
+  {
+    title: "Rib Line (Grover Beach)",
+    category: "Real Talk: Skip It",
+    tags: ["food"],
+    desc: "One of the most-agreed-on \"overrated\" call-outs on r/CalPoly — small portions, underwhelming sides, high prices, specifically at the Grover Beach location.",
+    cost: "$$",
+    link: null,
+    note: "r/CalPoly \"worst restaurants\" thread, Oct 2024 — strong agreement in the comments."
+  },
+  {
+    title: "Madonna Inn Dining",
+    category: "Real Talk: Skip It",
+    tags: ["food"],
+    desc: "The rooms and photo-ops are worth it, but the food gets real criticism — steaks called too salty and overpriced, cake called dry.",
+    cost: "$$",
+    link: null,
+    note: "r/CalPoly, Oct 2024. Go for the vibe, not the menu."
+  },
+  {
+    title: "House of Bagels",
+    category: "Real Talk: Skip It",
+    tags: ["food"],
+    desc: "Good taste, but reported high prices, 20–30 minute waits, and order mistakes.",
+    cost: "$",
+    link: null,
+    note: "One account, Oct 2024 — take as one data point, not consensus."
+  },
+  {
+    title: "Flour House",
+    category: "Real Talk: Skip It",
+    tags: ["food"],
+    desc: "Called overpriced and bland by at least one r/CalPoly commenter.",
+    cost: "$$",
+    link: null,
+    note: "r/CalPoly, May 2024."
+  },
+  {
+    title: "Ox + Anchor for a Special Occasion",
+    category: "Real Talk: Skip It",
+    tags: ["food"],
+    desc: "Genuinely mixed — one thread calls it a bad pick for an expensive night out, another recommends it highly and a reply says they loved it. Manage expectations either way.",
+    cost: "$$$",
+    link: null,
+    note: "r/CalPoly fine-dining discussion, April 2025."
+  },
+  {
+    title: "Firestone Grill — the Other Side of the Story",
+    category: "Real Talk: Skip It",
+    tags: ["food"],
+    desc: "Firestone is beloved (see Food & Local Spots) — but it's also been called SLO's most overrated restaurant by some, even as others strongly defend the tri-tip sandwich and fries.",
+    cost: "$",
+    link: null,
+    note: "r/CalPoly \"best/worst\" thread, April 2024 — read both sides and judge for yourself."
+  },
+  {
+    title: "Pismo Beach as \"The\" Beach Trip",
+    category: "Real Talk: Skip It",
+    tags: ["outdoors", "travel"],
+    desc: "Strong \"overrated\" sentiment as the default beach destination — parking and crowds are the main complaints. Shell Beach or Avila get suggested instead.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, April 2024 — one of the more strongly-agreed takes in that thread."
+  },
+  {
+    title: "Local Creek Swimming — Water Quality",
+    category: "Real Talk: Skip It",
+    tags: ["outdoors", "wellness"],
+    desc: "A commenter claiming experience measuring SLO Creek bacteria said they personally avoid local streams; others pushed back on how bad specific creeks actually are.",
+    cost: "Free",
+    link: null,
+    note: "A concern worth being aware of, not a confirmed water-quality finding. (r/CalPoly, April 2022)"
+  },
+
+  // ---------------- Know Before You Register ----------------
+  {
+    title: "Degree Planner's Auto-Rearrange Problem",
+    category: "Know Before You Register",
+    tags: ["academic"],
+    desc: "Editing one course can trigger the whole plan to auto-reorganize, moving classes you'd already placed in other quarters.",
+    cost: "Free",
+    link: null,
+    note: "\"It also attempts to auto reorganize everything around every single change...\" — r/CalPoly, May 2024. Some students prefer sketching their plan on a printed flowchart first."
+  },
+  {
+    title: "Semester Conversion Registration Snags",
+    category: "Know Before You Register",
+    tags: ["academic"],
+    desc: "With Cal Poly's brand-new semester system this year, some students have hit real friction — e.g. one transfer needing the new EE3306 was blocked because they'd already passed the old quarter-system equivalent.",
+    cost: "Free",
+    link: null,
+    note: "If something looks wrong on your plan post-conversion, don't assume it's you — ask your advisor early. (r/CalPoly, May 2026)"
+  },
+  {
+    title: "Technical Elective Prerequisites Outside the Flowchart",
+    category: "Know Before You Register",
+    tags: ["academic"],
+    desc: "Some majors' technical electives carry prerequisites that aren't obvious from the printed flowchart, leading to registration trouble almost every quarter for some students.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Feb 2021 — check actual course prerequisites in the catalog, not just the flowchart."
+  },
+  {
+    title: "Senior Year Doesn't Fix Sequencing Problems",
+    category: "Know Before You Register",
+    tags: ["academic"],
+    desc: "Missing a once-a-year elective as an underclassman can push a much heavier course load into your final year — priority registration alone doesn't undo bad sequencing.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, May 2024. Plan multi-quarter-out, not just next quarter."
+  },
+  {
+    title: "Figuring Out Who Your Advisor Is",
+    category: "Know Before You Register",
+    tags: ["academic"],
+    desc: "Some official forms require your advisor's email, but with multiple advisors listed for a program, it isn't always obvious which one is actually yours.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Sept 2020 — if unsure, ask your department office directly rather than guessing."
+  },
+  {
+    title: "Roommate Search Is Hard to Find",
+    category: "Know Before You Register",
+    tags: ["community"],
+    desc: "Cal Poly's housing portal has a roommate-search feature, but it's reportedly not obvious how to find it — some students only learn it exists when someone else finds them through it.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, May 2026 — check your housing portal's account/profile settings if you're hunting for a roommate."
+  },
+  {
+    title: "Housing Cancellation Is Not Straightforward",
+    category: "Know Before You Register",
+    tags: ["community"],
+    desc: "Students report conflicting information from Housing, Financial Aid, and the DRC about what's actually allowed when trying to cancel a housing contract.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, July 2026 — get any cancellation approval in writing, and start the conversation as early as possible."
+  },
+  {
+    title: "Dining Dollars ≠ Meal Swipes",
+    category: "Know Before You Register",
+    tags: ["academic", "free"],
+    desc: "Dining Dollars work like a cash balance, not a per-meal swipe — easy to misunderstand as an incoming student.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, May 2024."
+  },
+  {
+    title: "Dining Dollars Rollover Cap",
+    category: "Know Before You Register",
+    tags: ["academic"],
+    desc: "A quarterly rollover cap was reported starting fall 2025 — meaning unused Dining Dollars past a certain amount can be forfeited at quarter's end instead of carrying over.",
+    cost: "Free",
+    link: null,
+    note: "This was reported under the old quarter system (r/CalPoly, March 2025) — confirm how it applies under semesters before assuming your balance is safe."
+  },
+  {
+    title: "Grand Avenue Deli Price Increases",
+    category: "Know Before You Register",
+    tags: ["food"],
+    desc: "Returning students have flagged noticeable price increases and fewer customization options at on-campus dining spots like Grand Avenue Deli.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Jan 2025 — worth factoring into your meal plan budget expectations."
+  },
+
+  // ---------------- Freshman Regrets & Underused Benefits ----------------
+  {
+    title: "Free Campus Printing Spots",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["free", "academic"],
+    desc: "Several offices offer free printing most students never think to use: the MCC, Pride Center, the Scholars office (Bldg 52), and the Multicultural Engineering Program office (Bldg 40). The Transfer Center also offers a small free print allowance.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, 2023 reports — confirm current page limits in person."
+  },
+  {
+    title: "Library Textbook Reserves",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["free", "academic"],
+    desc: "Some assigned textbooks are available free through the library's course reserves — worth checking before buying.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly underused-benefits thread, Feb 2025."
+  },
+  {
+    title: "Library Equipment & Interlibrary Loan",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["free", "academic"],
+    desc: "Scantrons, calculators, and phone/laptop chargers are available at the library, and interlibrary loan can get you physical books even during on-campus construction disruptions.",
+    cost: "Free",
+    link: null,
+    note: "Confirm loan vs. giveaway for consumables like scantrons. (r/CalPoly, Feb 2025)"
+  },
+  {
+    title: "Free/Discounted Software (SPSS, ArcGIS Pro)",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["free", "tech", "academic"],
+    desc: "Some departments provide free licenses for expensive software like SPSS and ArcGIS Pro that students often don't realize they're entitled to.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Feb 2025 — ask your department about software access before paying for a license."
+  },
+  {
+    title: "Free Campus Yoga",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["free", "fitness", "wellness"],
+    desc: "Free yoga classes flagged by students as a genuinely underused benefit, separate from the general Rec Center group fitness schedule.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, Feb 2025."
+  },
+  {
+    title: "EOP Deadline Awareness",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["academic", "free"],
+    desc: "One incoming student estimated missing the EOP (Educational Opportunity Program) application deadline cost them roughly $1,000 in potential support.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly, July 2024 — mark EOP deadlines early if you might qualify."
+  },
+  {
+    title: "SHPE, TRIO & Cultural Community Groups",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["community", "free"],
+    desc: "Students specifically credit groups like SHPE, TRIO, and Polycultural WOW with making Cal Poly feel like home — recommended especially for students unsure where they fit.",
+    cost: "Free",
+    link: null,
+    note: "r/CalPoly freshman-regrets thread, July 2024."
+  },
+  {
+    title: "What Seniors Wish They Knew as Freshmen",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["community", "academic"],
+    desc: "The most common regrets from a big r/CalPoly thread: join something early, protect your GPA if you might need to change majors (ICMA eligibility), reconsider your major early if you're not enjoying the classes, try an internship in your field before senior year, and use counseling services before things get bad — not after.",
+    cost: "Free",
+    link: null,
+    note: "\"I wish I went [to] counseling services much sooner.\" — r/CalPoly, July 2019."
+  },
+
+  // ---------------- More Hidden Gems (Instagram / LocalWiki / KCPR) ----------------
+  {
+    title: "@slo.underground — Free All-Ages Local Shows",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts", "social", "free"],
+    desc: "An Instagram account posting free, all-ages local music shows around SLO — a real option for students who can't get into 21+ venues.",
+    cost: "Free",
+    link: null,
+    note: "This account reportedly took over after @slo.diy shut down — if an older guide points you to slo.diy, it's stale."
+  },
+  {
+    title: "The Bunker / MPU Underground Shows",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts", "social"],
+    desc: "A student-run underground music scene (Music Production Union) hosting small, cheap local shows — a different vibe from the mainstream campus events calendar.",
+    cost: "$",
+    link: null,
+    note: "Watch @slo.underground and campus club Instagram accounts for current show listings — dates rotate."
+  },
+  {
+    title: "Club Fundraiser House Shows",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts", "social", "community"],
+    desc: "Cal Poly clubs like Engineers Without Borders occasionally run house-show fundraisers with live bands, cash or Venmo entry, and snacks — proceeds go straight to the club.",
+    cost: "$",
+    link: null,
+    note: "Follow club Instagram accounts directly — these aren't listed anywhere central."
+  },
+  {
+    title: "Cal Poly Unicycle Club",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["community", "fitness", "free"],
+    desc: "Yes, this is a real, active club (@cpunicycle) that hosts flatland competitions — about as niche and unexpected as Cal Poly clubs get.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "CPSalsa Beginner Dance Nights",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["social", "fitness"],
+    desc: "Weekly bachata and salsa nights in Building 5, Room 225 — no experience or partner required, mixer included.",
+    cost: "$",
+    link: null,
+    note: "⚠️ One flyer showed conflicting student prices ($4 in the caption vs $7 on the image) — confirm the actual price with organizers before assuming either."
+  },
+  {
+    title: "Lemon Grove–Rock Garden Loop",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors", "free"],
+    desc: "A roughly 4-mile loop starting at the Lemon Grove trailhead on Fernandez Lane, with an alternate approach from the Madonna Mountain side.",
+    cost: "Free",
+    link: null,
+    note: "Recommended in Her Campus Cal Poly's student-written hiking guide."
+  },
+  {
+    title: "Community Fruit Tree Maps",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["free", "food", "outdoors"],
+    desc: "SLO's community LocalWiki maintains maps of public fruit trees around town — loquats, figs, pineapple guava, persimmons, kumquats, avocados, and apples.",
+    cost: "Free",
+    link: null,
+    note: "Genuinely unique local knowledge — individual trees' access and ripeness will vary, so check before a special trip."
+  },
+  {
+    title: "Neighborhood Little Free Libraries",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["free", "academic"],
+    desc: "Community-run book boxes around town, including ones at Mill & Toro, Broad & Pacific, and near Grand & Monterey.",
+    cost: "Free",
+    link: null,
+    note: "Based on an older community inventory — locations can change."
+  },
+  {
+    title: "Bike Night (First Thursday)",
+    category: "Day Trips & Traditions",
+    tags: ["social", "outdoors", "free"],
+    desc: "A monthly community bike ride on the first Thursday of the month, right after the Farmers' Market wraps up — a free, low-key social alternative to bar-hopping.",
+    cost: "Free",
+    link: null,
+    note: "Reported on by KCPR, Cal Poly's student radio station."
+  },
+  {
+    title: "\"Deep Dark\" Creek Tunnel",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["community"],
+    desc: "A creek tunnel running under downtown SLO with its own graffiti and local lore, documented on SLO's community LocalWiki.",
+    cost: "Free",
+    link: null,
+    note: "This is local folklore, not a vetted hiking spot — current permitted access is unconfirmed, so treat it as a story to know, not an itinerary to follow."
+  },
+
+  // ---------------- More Local Food Finds ----------------
+  {
+    title: "Honeymoon Cafe (Pismo)",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food", "travel"],
+    desc: "A Pismo cafe on Price Street — the cowboy burrito and jackfruit banh mi bowl are the specific student-recommended orders.",
+    cost: "$",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Creamery Friday Drive-Through",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "Most Fridays, noon–4pm: student-made ice cream (single scoop $6, double $8, pints $9), a $12 cheese \"Odds & Ends\" box, plus student-made summer sausage and chocolate.",
+    cost: "$",
+    link: null,
+    note: "Check the Creamery's current page before going — hours are \"most Fridays,\" not guaranteed every week."
+  },
+
+  // ---------------- More Underused Resources ----------------
+  {
+    title: "SLO County Library Card → Free MakerSpace Hours",
+    category: "Creative & Maker Spaces",
+    tags: ["free", "tech", "arts"],
+    desc: "A free SLO County library card unlocks up to 15 free hours a week at SLO MakerSpace — woodworking, metalworking, pottery, electronics, and 3D printing.",
+    cost: "Free",
+    link: null,
+    note: "Materials aren't included, and some equipment needs a separate paid certification — confirm current hours with the library FAQ."
+  },
+  {
+    title: "Library of Things",
+    category: "Creative & Maker Spaces",
+    tags: ["free", "tech"],
+    desc: "SLO County Library lends more than books: tool kits (via SLO MakerSpace), board games, sewing/craft supplies, museum passes, and parks passes. The Shandon branch has its own separate power-tool collection.",
+    cost: "Free",
+    link: null,
+    note: "Different items have different pickup requirements — check per item."
+  },
+  {
+    title: "Sharing SLO Community Directory",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["free", "community"],
+    desc: "A community-maintained directory of niche local resources: Table Ware Share (borrow event flatware), the SLO Seed Exchange, the SLO Produce Exchange, slacklining at Meadow Park, and lunchtime bocce at Emerson Park.",
+    cost: "Free",
+    link: null,
+    note: "Community-maintained leads — freshness varies, so double-check before counting on any one of them."
+  },
+  {
+    title: "SLO Little 500",
+    category: "Day Trips & Traditions",
+    tags: ["community", "social"],
+    desc: "A local underground bicycle relay tradition — four-person teams sharing one bicycle, in costume, competing for a trophy teams add to year after year. Announcements are deliberately scattered across social media rather than centrally listed.",
+    cost: "Free",
+    link: null,
+    note: "Documented by New Times SLO as a genuine local subculture worth knowing about."
+  },
+
+  // ---------------- Campus Life Reality Check ----------------
+  {
+    title: "Communal Laundry Frustrations (PCV)",
+    category: "Know Before You Register",
+    tags: ["community"],
+    desc: "A recurring complaint in campus social media: clothes pulled out of shared dryers by other residents while still wet, sometimes with real time left on the cycle.",
+    cost: "Free",
+    link: null,
+    note: "Set a phone timer and try to be back right when your cycle ends — a common workaround students mention."
   }
 ];
