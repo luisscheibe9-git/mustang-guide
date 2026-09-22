@@ -30,17 +30,22 @@
 
 <main>
   <div class="filter-bar">
-    <div class="filter-group" id="interest-filters">
-      <span class="filter-label">Interests</span>
+    <div class="filter-group interest-filter" id="interest-filter-wrap">
+      <button type="button" class="chip interest-toggle" id="interest-toggle">
+        <span id="interest-toggle-label">Filter by interest</span>
+        <span class="interest-caret">&#9662;</span>
+      </button>
+      <div class="interest-dropdown" id="interest-dropdown">
+        <div class="interest-list" id="interest-list"></div>
+        <button type="button" class="interest-clear-btn" id="interest-clear">Clear interests</button>
+      </div>
     </div>
-    <div class="filter-group" id="cost-filters">
+    <div class="filter-group cost-slider-group">
       <span class="filter-label">Cost</span>
-      <button class="chip cost-chip" data-cost="all">All</button>
-      <button class="chip cost-chip" data-cost="Free">Free</button>
-      <button class="chip cost-chip" data-cost="$">$ Cheap</button>
-      <button class="chip cost-chip" data-cost="$$">$$</button>
+      <input type="range" id="cost-slider" min="0" max="3" step="1" value="3">
+      <span class="cost-slider-label" id="cost-slider-label">Any price</span>
     </div>
-    <button class="chip clear-chip" id="btn-clear-filters">Clear filters</button>
+    <button class="chip clear-chip" id="btn-clear-filters">Clear all</button>
   </div>
 
   <nav class="category-nav" id="category-nav"></nav>
