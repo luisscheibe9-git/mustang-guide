@@ -51,6 +51,14 @@ h1, h2, h3 { font-family: var(--font-display); }
   padding: 52px 20px 40px;
 }
 .hero-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.hero-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0s forwards;
+}
+.hero-logo img { width: 190px; height: auto; }
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 3px;
