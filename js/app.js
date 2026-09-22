@@ -1,10 +1,19 @@
 (function () {
   "use strict";
 
+  const COST_TIERS = ["Free", "$", "$$", "$$$"];
+  function costRank(cost) {
+    if (cost === "Free") return 0;
+    if (cost === "$") return 1;
+    if (cost === "Discount") return 1;
+    if (cost === "$$") return 2;
+    return 3; // $$$
+  }
+
   const state = {
     query: "",
     interests: new Set(),
-    cost: "all"
+    maxCostRank: 3
   };
 
   function costClass(cost) {
@@ -15,7 +24,7 @@
   }
 
   function matches(item) {
-    if (state.cost !== "all" && item.cost !== state.cost) return false;
+    if (costRank(item.cost) > state.maxCostRank) return false;
     if (state.interests.size > 0) {
       const hasAny = item.tags.some((t) => state.interests.has(t));
       if (!hasAny) return false;
@@ -112,7 +121,8 @@
       <p>${item.desc}</p>
       ${item.note ? `<p><b>Access:</b> ${item.note}</p>` : ""}
       <div class="modal-actions">
-        ${item.link ? `<a class="btn-link" href="${item.link}" target="_blank" rel="noopener">Open link</a>` : ""}
+        ${item.link ? `<a class="btn-link" href="${item.link}" target="_blank" rel="noopener">Website</a>` : ""}
+        ${item.map ? `<a class="btn-link btn-link-alt" href="${item.map}" target="_blank" rel="noopener">Directions</a>` : ""}
       </div>
     `;
     backdrop.classList.add("active");
@@ -125,35 +135,71 @@
     if (e.target.id === "modal-backdrop") closeModal();
   });
 
-  function renderInterestChips() {
-    const wrap = document.getElementById("interest-filters");
+  // ---------------- Interests: dropdown filter ----------------
+  function renderInterestDropdown() {
+    const list = document.getElementById("interest-list");
+    const toggleLabel = document.getElementById("interest-toggle-label");
+
     INTERESTS.forEach((interest) => {
-      const chip = document.createElement("button");
-      chip.className = "chip";
-      chip.textContent = interest;
-      chip.addEventListener("click", () => {
-        if (state.interests.has(interest)) {
-          state.interests.delete(interest);
-          chip.classList.remove("active");
-        } else {
-          state.interests.add(interest);
-          chip.classList.add("active");
-        }
+      const row = document.createElement("label");
+      row.className = "interest-row";
+      row.innerHTML = `<input type="checkbox" value="${interest}"> <span>${interest}</span>`;
+      const checkbox = row.querySelector("input");
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) state.interests.add(interest);
+        else state.interests.delete(interest);
+        updateInterestLabel();
         render();
       });
-      wrap.appendChild(chip);
+      list.appendChild(row);
     });
-  }
 
-  document.querySelectorAll(".cost-chip").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      document.querySelectorAll(".cost-chip").forEach((c) => c.classList.remove("active"));
-      chip.classList.add("active");
-      state.cost = chip.dataset.cost;
+    function updateInterestLabel() {
+      const n = state.interests.size;
+      toggleLabel.textContent = n === 0 ? "Filter by interest" : `${n} interest${n === 1 ? "" : "s"} selected`;
+      document.getElementById("interest-toggle").classList.toggle("active", n > 0);
+    }
+
+    const toggle = document.getElementById("interest-toggle");
+    const dropdown = document.getElementById("interest-dropdown");
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle("open");
+    });
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target) && e.target !== toggle) {
+        dropdown.classList.remove("open");
+      }
+    });
+
+    document.getElementById("interest-clear").addEventListener("click", (e) => {
+      e.stopPropagation();
+      state.interests.clear();
+      list.querySelectorAll("input").forEach((c) => (c.checked = false));
+      updateInterestLabel();
       render();
     });
-  });
-  document.querySelector('.cost-chip[data-cost="all"]').classList.add("active");
+
+    updateInterestLabel();
+  }
+
+  // ---------------- Cost: slider filter ----------------
+  function initCostSlider() {
+    const slider = document.getElementById("cost-slider");
+    const label = document.getElementById("cost-slider-label");
+
+    function updateLabel() {
+      const rank = Number(slider.value);
+      label.textContent = rank >= 3 ? "Any price" : `Up to ${COST_TIERS[rank]}`;
+    }
+
+    slider.addEventListener("input", () => {
+      state.maxCostRank = Number(slider.value);
+      updateLabel();
+      render();
+    });
+    updateLabel();
+  }
 
   document.getElementById("search-input").addEventListener("input", (e) => {
     state.query = e.target.value.trim();
@@ -162,11 +208,14 @@
 
   document.getElementById("btn-clear-filters").addEventListener("click", () => {
     state.query = "";
-    state.cost = "all";
+    state.maxCostRank = 3;
     state.interests.clear();
     document.getElementById("search-input").value = "";
-    document.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-    document.querySelector('.cost-chip[data-cost="all"]').classList.add("active");
+    document.getElementById("cost-slider").value = 3;
+    document.getElementById("cost-slider-label").textContent = "Any price";
+    document.querySelectorAll("#interest-list input").forEach((c) => (c.checked = false));
+    document.getElementById("interest-toggle-label").textContent = "Filter by interest";
+    document.getElementById("interest-toggle").classList.remove("active");
     render();
   });
 
@@ -178,6 +227,7 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  renderInterestChips();
+  renderInterestDropdown();
+  initCostSlider();
   render();
 })();

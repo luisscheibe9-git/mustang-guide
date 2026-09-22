@@ -5,7 +5,8 @@
 //   tags: [string],         // interest tags for filtering
 //   desc: string,           // 1-2 sentence description
 //   cost: "Free" | "$" | "$$" | "Discount",
-//   link: string | null,
+//   link: string | null,    // website, if known
+//   map: string | null,     // optional Google Maps link for physical places
 //   note: string | null     // access instructions / caveats
 // }
 
@@ -30,8 +31,18 @@ const CATEGORY_ORDER = [
 ];
 
 const INTERESTS = [
-  "outdoors", "food", "fitness", "arts", "academic", "career",
-  "wellness", "free", "tech", "social", "travel", "community"
+  "outdoors",
+  "food",
+  "fitness",
+  "arts",
+  "academic",
+  "career",
+  "wellness",
+  "free",
+  "tech",
+  "social",
+  "travel",
+  "community"
 ];
 
 const RESOURCES = [
@@ -48,7 +59,7 @@ const RESOURCES = [
   {
     title: "Kennedy Library Tech Rentals",
     category: "Campus Rentals & Gear",
-    tags: ["tech", "free", "academic"],
+    tags: ["tech","free","academic"],
     desc: "Free laptop, iPad, Kindle, camera, tripod, projector, 360° camera, and GoPro lending for academic use.",
     cost: "Free",
     link: "https://techrentals.calpoly.edu/",
@@ -57,7 +68,7 @@ const RESOURCES = [
   {
     title: "Rec Center Pro Shop Equipment Checkout",
     category: "Campus Rentals & Gear",
-    tags: ["fitness", "free", "social"],
+    tags: ["fitness","free","social"],
     desc: "Free same-day checkout of basketballs, volleyballs, footballs, Spikeball sets, badminton, frisbees, and more.",
     cost: "Free",
     link: "https://www.asi.calpoly.edu/facilities/recreation-center/the-pro-shop/",
@@ -66,7 +77,7 @@ const RESOURCES = [
   {
     title: "Craft Center Mobile Bike Repair",
     category: "Campus Rentals & Gear",
-    tags: ["free", "tech"],
+    tags: ["free","tech"],
     desc: "Free bike tune-ups, tube/cable changes, and brake bleeds from a mobile repair unit that visits Dexter Lawn and UU Plaza, weeks 2–10 each quarter.",
     cost: "Free",
     link: "https://www.asi.calpoly.edu/asi-now/asi-blog/get-your-bike-fixed-for-free/",
@@ -86,7 +97,7 @@ const RESOURCES = [
   {
     title: "Climbing Park",
     category: "Recreation & Fitness",
-    tags: ["fitness", "outdoors", "free"],
+    tags: ["fitness","outdoors","free"],
     desc: "42-foot outdoor climbing wall plus a bouldering wall — shoes and harnesses provided, no experience needed.",
     cost: "Free",
     link: "https://www.asi.calpoly.edu/get-active/climbing-park/",
@@ -95,7 +106,7 @@ const RESOURCES = [
   {
     title: "Group Fitness Classes",
     category: "Recreation & Fitness",
-    tags: ["fitness", "free"],
+    tags: ["fitness","free"],
     desc: "Yoga, Pilates, Body Pump, krav maga, and dance-style classes, free with Rec Center access.",
     cost: "Free",
     link: "https://www.asi.calpoly.edu/get-active/fitness/",
@@ -104,7 +115,7 @@ const RESOURCES = [
   {
     title: "Intramural Sports",
     category: "Recreation & Fitness",
-    tags: ["fitness", "social", "community"],
+    tags: ["fitness","social","community"],
     desc: "Volleyball, pickleball, basketball, flag football, soccer, softball, and ultimate frisbee leagues across three skill divisions.",
     cost: "$",
     link: "https://www.asi.calpoly.edu/get-active/intramural-sports/",
@@ -113,7 +124,7 @@ const RESOURCES = [
   {
     title: "Club Sports",
     category: "Recreation & Fitness",
-    tags: ["fitness", "community"],
+    tags: ["fitness","community"],
     desc: "Competitive student-run teams, a step up from intramurals — note a club-sport roster spot can make you ineligible for the same intramural sport that season.",
     cost: "$",
     link: "https://www.asi.calpoly.edu/discover-asi/public-documents/forms-policies/intramural-sports-forms-policies/",
@@ -126,6 +137,7 @@ const RESOURCES = [
     desc: "The University Union's own bowling alley and billiards room — $4.50/game for Cal Poly students, or $2.50/game for everyone on Tuesdays.",
     cost: "$",
     link: "https://www.mustanglanes.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=Mustang%20Lanes%20(Bowling)%20San%20Luis%20Obispo%20CA",
     note: "Show your Cal Poly ID at the counter."
   },
 
@@ -133,7 +145,7 @@ const RESOURCES = [
   {
     title: "Tutoring & Learning Center (TLC)",
     category: "Academic & Career Help",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "Free peer tutoring across all six colleges, plus drop-in Help Hubs for math, stats, engineering, and architecture — no appointment needed for Help Hubs.",
     cost: "Free",
     link: "https://writingandlearning.calpoly.edu/tutoring",
@@ -142,7 +154,7 @@ const RESOURCES = [
   {
     title: "Writing Support",
     category: "Academic & Career Help",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "Free peer writing tutors for any course or project, at any stage of the writing process.",
     cost: "Free",
     link: "https://writingandlearning.calpoly.edu/writing-support",
@@ -151,7 +163,7 @@ const RESOURCES = [
   {
     title: "Academic Coaching",
     category: "Academic & Career Help",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "One-on-one coaching on goal-setting, time management, and study strategies — open to any student, not just those struggling.",
     cost: "Free",
     link: "https://writingandlearning.calpoly.edu/academic-coaching",
@@ -160,7 +172,7 @@ const RESOURCES = [
   {
     title: "CSC/SE Tutoring Center",
     category: "Academic & Career Help",
-    tags: ["academic", "tech", "free"],
+    tags: ["academic","tech","free"],
     desc: "Department-run drop-in tutoring specifically for Computer Science / Software Engineering courses.",
     cost: "Free",
     link: "https://csc.calpoly.edu/tutoring/",
@@ -169,7 +181,7 @@ const RESOURCES = [
   {
     title: "Math & Stats Department Tutoring",
     category: "Academic & Career Help",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "Department-run tutoring for math and statistics courses, separate from the general TLC Help Hub.",
     cost: "Free",
     link: "https://math.calpoly.edu/tutoring",
@@ -178,7 +190,7 @@ const RESOURCES = [
   {
     title: "Orfalea Business Peer Mentoring",
     category: "Academic & Career Help",
-    tags: ["academic", "career"],
+    tags: ["academic","career"],
     desc: "Upperclassman peer mentors for Business Admin, Econ, and Industrial Tech students on study skills and navigating college resources.",
     cost: "Free",
     link: "https://orfalea.calpoly.edu/peer-mentoring",
@@ -187,7 +199,7 @@ const RESOURCES = [
   {
     title: "Big Interview",
     category: "Academic & Career Help",
-    tags: ["career", "free"],
+    tags: ["career","free"],
     desc: "Virtual mock-interview practice tool with tutorials, free through Career Services.",
     cost: "Free",
     link: "https://careerservices.calpoly.edu/explore-services/resource-toolkit/online-resources",
@@ -196,7 +208,7 @@ const RESOURCES = [
   {
     title: "Big Resume",
     category: "Academic & Career Help",
-    tags: ["career", "free", "tech"],
+    tags: ["career","free","tech"],
     desc: "AI-assisted resume feedback and ATS optimization, free through Career Services.",
     cost: "Free",
     link: "https://careerservices.calpoly.edu/explore-services/resource-toolkit/online-resources",
@@ -205,7 +217,7 @@ const RESOURCES = [
   {
     title: "1:1 Career Counseling & Mock Interviews",
     category: "Academic & Career Help",
-    tags: ["career", "free"],
+    tags: ["career","free"],
     desc: "In-person practice interviews and resume review with a career counselor assigned to your college.",
     cost: "Free",
     link: "https://careerservices.calpoly.edu/",
@@ -214,7 +226,7 @@ const RESOURCES = [
   {
     title: "MustangJobs",
     category: "Academic & Career Help",
-    tags: ["career", "free"],
+    tags: ["career","free"],
     desc: "Cal Poly's job and internship board, including on-campus jobs and career fair sign-ups.",
     cost: "Free",
     link: "https://careerservices.calpoly.edu/",
@@ -223,7 +235,7 @@ const RESOURCES = [
   {
     title: "Career Fairs",
     category: "Academic & Career Help",
-    tags: ["career", "social"],
+    tags: ["career","social"],
     desc: "About 11 signature career fairs and networking events run each year connecting students directly with employers.",
     cost: "Free",
     link: "https://careerservices.calpoly.edu/",
@@ -232,18 +244,99 @@ const RESOURCES = [
   {
     title: "PathwayU",
     category: "Academic & Career Help",
-    tags: ["career", "free"],
+    tags: ["career","free"],
     desc: "A free career self-discovery and exploration assessment tool for students still figuring out their direction.",
     cost: "Free",
     link: "https://careerservices.calpoly.edu/explore-services/resource-toolkit/online-resources",
     note: null
+  },
+  {
+    title: "CAFES Advising Center",
+    category: "Academic & Career Help",
+    tags: ["academic","free"],
+    desc: "Advising specifically for Agriculture, Food & Environmental Sciences students (Bldg 80-M) — serves transfer and 2nd-year+ students. Also runs the Multicultural Agriculture Program (MAP): peer mentoring, quarterly workshops, and career events.",
+    cost: "Free",
+    link: "https://cafes.calpoly.edu/student-services/academic-advising",
+    note: "1st-years use the university-wide Mustang Success Center instead."
+  },
+  {
+    title: "CLA Advising Center",
+    category: "Academic & Career Help",
+    tags: ["academic","free"],
+    desc: "Advising for Liberal Arts students (Bldg 47, Rm 36R) with Zoom drop-ins and peer advisors. Also partners with College Possible Catalyze for near-peer success coaching, with a stated focus on men of color.",
+    cost: "Free",
+    link: "https://cla.calpoly.edu/advising",
+    note: "Drop-ins: M–Tu 10–noon, W–Th 2–4pm."
+  },
+  {
+    title: "CAED Advising Center",
+    category: "Academic & Career Help",
+    tags: ["academic","free"],
+    desc: "Open-door advising (Bldg 05, Rm 210, M–F 9am–4pm) for all 5 CAED majors, plus a peer-mentoring \"Buddy Program\" for belonging and connection.",
+    cost: "Free",
+    link: "https://caed.calpoly.edu/caed-advising",
+    note: null
+  },
+  {
+    title: "Scholarship QuickLink",
+    category: "Academic & Career Help",
+    tags: ["academic","free"],
+    desc: "Cal Poly's actual scholarship mechanism — continuing students apply each March through a tool inside the My Cal Poly Portal, matched largely by college/major. New students are auto-considered on admission.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Textbook Rental & Buyback (El Corral)",
+    category: "Academic & Career Help",
+    tags: ["academic","free"],
+    desc: "The campus bookstore offers textbook rentals typically under half the new price, plus an end-of-term buyback program for cash or store credit.",
+    cost: "$",
+    link: null,
+    note: null
+  },
+  {
+    title: "CashCourse",
+    category: "Academic & Career Help",
+    tags: ["academic","free"],
+    desc: "Free financial-literacy platform through Campus Health & Wellbeing — budgeting tools, calculators, and quizzes.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Frost Summer Undergraduate Research Program",
+    category: "Academic & Career Help",
+    tags: ["academic","career"],
+    desc: "Funded by the $110M Bill & Linda Frost gift. Frost Research Scholars get a $10,000 scholarship including a guaranteed $4,500 SURP stipend for summer research.",
+    cost: "Free",
+    link: null,
+    note: "Cal Poly-wide, more than 1,200 students are paid roughly $1.4 million annually for research work."
+  },
+  {
+    title: "LSAMP Research Scholars Program",
+    category: "Academic & Career Help",
+    tags: ["academic","career"],
+    desc: "A $4,000 stipend for Winter/Spring quarter research with a Cal Poly faculty mentor, for LSAMP-eligible (generally underrepresented STEM) students.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Study Abroad / International Center",
+    category: "Academic & Career Help",
+    tags: ["academic","travel"],
+    desc: "Multiple program tracks — faculty-led Global Programs, bilateral exchanges, third-party Partner Programs, CSU International Programs, and National Student Exchange (a ~200-school US/Canada/territories consortium). \"First Year GO\" is an entry-level option for freshmen.",
+    cost: "$$",
+    link: "https://abroad.calpoly.edu/",
+    note: "Library Bldg 35, Rm 319. Structured Plan → Find → Apply → Pre-Departure process with peer advisors."
   },
 
   // ---------------- Wellness & Basic Needs ----------------
   {
     title: "Counseling & Psychological Services (CAPS)",
     category: "Wellness & Basic Needs",
-    tags: ["wellness", "free"],
+    tags: ["wellness","free"],
     desc: "Free, confidential individual, couples, and group mental health counseling for all enrolled students, plus a 24/7 crisis line.",
     cost: "Free",
     link: "https://chw.calpoly.edu/counseling",
@@ -252,7 +345,7 @@ const RESOURCES = [
   {
     title: "WellTrack Boost App",
     category: "Wellness & Basic Needs",
-    tags: ["wellness", "free", "tech"],
+    tags: ["wellness","free","tech"],
     desc: "Free CBT-based self-help app for anxiety, depression, mood tracking, and mindfulness — available to every student.",
     cost: "Free",
     link: "https://chw.calpoly.edu/counseling/apps",
@@ -261,7 +354,7 @@ const RESOURCES = [
   {
     title: "Free Condoms & Safer-Sex Supplies",
     category: "Wellness & Basic Needs",
-    tags: ["wellness", "free"],
+    tags: ["wellness","free"],
     desc: "Free condoms in the Health & Wellbeing lobby, plus 24/7 vending machines with emergency contraception and pregnancy tests.",
     cost: "Free",
     link: "https://chw.calpoly.edu/health/sexual-reproductive-health-services",
@@ -270,7 +363,7 @@ const RESOURCES = [
   {
     title: "SAFER",
     category: "Wellness & Basic Needs",
-    tags: ["wellness", "free"],
+    tags: ["wellness","free"],
     desc: "Confidential, state-certified prevention education and advocacy for sexual assault, intimate partner violence, stalking, and harassment.",
     cost: "Free",
     link: "https://safer.calpoly.edu/",
@@ -279,7 +372,7 @@ const RESOURCES = [
   {
     title: "Cal Poly Food Pantry",
     category: "Wellness & Basic Needs",
-    tags: ["free", "wellness"],
+    tags: ["free","wellness"],
     desc: "Open-access pantry with packaged and fresh food, hygiene items, and menstrual products — no eligibility screening, no proof required.",
     cost: "Free",
     link: "https://basicneeds.calpoly.edu/foodpantry",
@@ -288,7 +381,7 @@ const RESOURCES = [
   {
     title: "CalFresh Outreach",
     category: "Wellness & Basic Needs",
-    tags: ["free", "wellness"],
+    tags: ["free","wellness"],
     desc: "Free help applying for CalFresh food benefits, which can add up to $150+/month.",
     cost: "Free",
     link: "https://www.calfreshcalpoly.org/student-resources-1",
@@ -297,7 +390,7 @@ const RESOURCES = [
   {
     title: "Cal Poly Cares Grant",
     category: "Wellness & Basic Needs",
-    tags: ["free", "wellness"],
+    tags: ["free","wellness"],
     desc: "Emergency funds for urgent hardship — housing, utilities, medical costs, or replacing essentials lost to fire, flood, or theft.",
     cost: "Free",
     link: "https://deanofstudents.calpoly.edu/cal-poly-cares-grant",
@@ -311,6 +404,24 @@ const RESOURCES = [
     cost: "Free",
     link: "https://afd.calpoly.edu/sustainability/student/swap-n-shops",
     note: "Building 82, off Mt. Bishop Rd. It's a recurring pop-up rather than a permanent store — 65 visitors showed up by the midpoint of its spring 2026 opening day, per Mustang News. Watch for the next opening announcement."
+  },
+  {
+    title: "Disability Resource Center (DRC)",
+    category: "Wellness & Basic Needs",
+    tags: ["wellness","academic","free"],
+    desc: "Handles accommodations: alternative media and notetaking, test accommodations, extended due dates, reduced course load, assistive technology, sign language interpreting, housing/dining accommodations, and a Strategic Coaching Program.",
+    cost: "Free",
+    link: "https://drc.calpoly.edu/content/drc-services",
+    note: "Building 124. Requests go through an intake appointment via the My Cal Poly Portal — accommodations can't be retroactive, so start early."
+  },
+  {
+    title: "Mustang Patrol Safety Escort",
+    category: "Wellness & Basic Needs",
+    tags: ["wellness","free"],
+    desc: "Free campus safety escort — call and an officer will walk with you to any on-campus destination or your car. Also covered by the Mustang Safe app, which adds a virtual \"friend walk\" feature and quick access to emergency resources.",
+    cost: "Free",
+    link: "https://afd.calpoly.edu/police/services/escort-van",
+    note: "Call Cal Poly Police Dispatch: 805-756-2281. Sun–Thu 7–11pm, Fri–Sat 8pm–2am."
   },
 
   // ---------------- Creative & Maker Spaces ----------------
@@ -326,7 +437,7 @@ const RESOURCES = [
   {
     title: "Mustang Makerspace",
     category: "Creative & Maker Spaces",
-    tags: ["tech", "free"],
+    tags: ["tech","free"],
     desc: "Open-to-all-majors 3D printing and fabrication space — no certification required, staffed by student shop techs.",
     cost: "Free",
     link: "https://ceng.calpoly.edu/news/mustang-makerspace-opens-the-door-to-projects-across-campus",
@@ -335,7 +446,7 @@ const RESOURCES = [
   {
     title: "Innovation Sandbox",
     category: "Creative & Maker Spaces",
-    tags: ["tech", "free", "career"],
+    tags: ["tech","free","career"],
     desc: "Student-run rapid-prototyping space in Kennedy Library — laser cutters, 3D printers, workshops, and Ideation Grant funding for projects.",
     cost: "Free",
     link: "https://cie.calpoly.edu/learn/innovation-sandbox-2/",
@@ -344,7 +455,7 @@ const RESOURCES = [
   {
     title: "University Art Gallery",
     category: "Creative & Maker Spaces",
-    tags: ["arts", "free"],
+    tags: ["arts","free"],
     desc: "Rotating exhibitions including student juried shows and BFA thesis shows, free to visit.",
     cost: "Free",
     link: "https://artgallery.calpoly.edu/",
@@ -353,11 +464,29 @@ const RESOURCES = [
   {
     title: "Center for Innovation & Entrepreneurship",
     category: "Creative & Maker Spaces",
-    tags: ["career", "community", "free"],
+    tags: ["career","community","free"],
     desc: "Startup support open to any major — the Hatchery, HotHouse Accelerator, and Incubator have helped launch 119+ student businesses since 2010.",
     cost: "Free",
     link: "https://cie.calpoly.edu/",
     note: "Now has a downtown SLO location on Chorro St."
+  },
+  {
+    title: "SLO County Library Card → Free MakerSpace Hours",
+    category: "Creative & Maker Spaces",
+    tags: ["free","tech","arts"],
+    desc: "A free SLO County library card unlocks up to 15 free hours a week at SLO MakerSpace — woodworking, metalworking, pottery, electronics, and 3D printing.",
+    cost: "Free",
+    link: null,
+    note: "Materials aren't included, and some equipment needs a separate paid certification — confirm current hours with the library FAQ."
+  },
+  {
+    title: "Library of Things",
+    category: "Creative & Maker Spaces",
+    tags: ["free","tech"],
+    desc: "SLO County Library lends more than books: tool kits (via SLO MakerSpace), board games, sewing/craft supplies, museum passes, and parks passes. The Shandon branch has its own separate power-tool collection.",
+    cost: "Free",
+    link: null,
+    note: "Different items have different pickup requirements — check per item."
   },
 
   // ---------------- Discounts & Deals ----------------
@@ -368,6 +497,7 @@ const RESOURCES = [
     desc: "$6 off any Large or XL pizza with code STUDENT, plus half-price pints (after the first) on Wednesday Pint Night.",
     cost: "Discount",
     link: "https://woodstocksslo.com/deals/",
+    map: "https://www.google.com/maps/search/?api=1&query=Woodstock's%20Pizza%20Student%20Deals%20San%20Luis%20Obispo%20CA",
     note: "Show a valid college ID."
   },
   {
@@ -382,7 +512,7 @@ const RESOURCES = [
   {
     title: "SLOMA Membership Discount",
     category: "Discounts & Deals",
-    tags: ["arts", "free"],
+    tags: ["arts","free"],
     desc: "General admission to the SLO Museum of Art is free for everyone, and students get 20% off a Standard membership.",
     cost: "Free",
     link: "https://sloma.org/",
@@ -445,7 +575,7 @@ const RESOURCES = [
   {
     title: "Adobe Creative Cloud Student Pricing",
     category: "Discounts & Deals",
-    tags: ["arts", "tech"],
+    tags: ["arts","tech"],
     desc: "$19.99/month for the first year (vs. $69.99 regular) for the full All Apps plan — about 71% off.",
     cost: "Discount",
     link: "https://www.adobe.com/creativecloud/buy/students.html",
@@ -454,18 +584,229 @@ const RESOURCES = [
   {
     title: "GitHub Student Developer Pack",
     category: "Discounts & Deals",
-    tags: ["tech", "free"],
+    tags: ["tech","free"],
     desc: "Free bundle: GitHub Pro, Copilot, Codespaces Pro, a $100 Azure credit, free JetBrains IDEs, and 70+ more partner offers.",
     cost: "Free",
     link: "https://education.github.com/pack",
     note: "Verify with school email or enrollment proof."
+  },
+  {
+    title: "Old SLO BBQ — Student Discount",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "10% off with a student ID, per a recent r/CalPoly report.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Old%20SLO%20BBQ%20San%20Luis%20Obispo%20CA",
+    note: "Reported Aug 2025 — worth confirming it's still running before you count on it."
+  },
+  {
+    title: "High Street Deli — After 4:20pm",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "Discounted sandwiches late in the day — one commenter called it close to half off.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=High%20Street%20Deli%20San%20Luis%20Obispo%20CA",
+    note: "The daily special is reportedly excluded, and the window before closing is short — order ahead. (r/CalPoly, Feb 2026)"
+  },
+  {
+    title: "Sprouts — $5 Sandwiches & Wednesday Sushi",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "$5 sandwiches, plus a Wednesday sushi deal.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Sprouts%20San%20Luis%20Obispo%20CA",
+    note: "r/CalPoly, Feb 2026."
+  },
+  {
+    title: "Fatte's — Two-for-One Pizza",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "A reported two-for-one pizza deal.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Fatte's%20San%20Luis%20Obispo%20CA",
+    note: "r/CalPoly, Feb 2026 — confirm current terms."
+  },
+  {
+    title: "Eureka — Kids' Meal & Happy Hour",
+    category: "Discounts & Deals",
+    tags: ["food"],
+    desc: "A $10 kids' burger/fries/drink combo ordered online, and separately a $13 burger-and-fries happy hour with $8.50 cocktails.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Eureka%20San%20Luis%20Obispo%20CA",
+    note: "r/CalPoly, Aug 2025 & Feb 2026."
+  },
+  {
+    title: "Piadina / Hotel SLO Rooftop — Monday Pizza",
+    category: "Discounts & Deals",
+    tags: ["food","social"],
+    desc: "A reported half-price (possibly BOGO) Monday pizza deal on the rooftop.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Piadina%20%2F%20Hotel%20SLO%20Rooftop%20San%20Luis%20Obispo%20CA",
+    note: "Reports differ on exact format between 2025 and 2026 — verify when you go. (r/CalPoly, Sept 2026)"
+  },
+  {
+    title: "SLOeats App Referral Code",
+    category: "Discounts & Deals",
+    tags: ["food","tech"],
+    desc: "A student-shared referral code (FARMERS) reportedly unlocked a free month of premium and BOGO deals on the local food-ordering app SLOeats.",
+    cost: "Discount",
+    link: null,
+    note: "⚠️ Reported by students in 2023 — current validity unverified. Try it, but don't count on it."
+  },
+  {
+    title: "Foothill Cyclery Student Discount",
+    category: "Discounts & Deals",
+    tags: ["outdoors"],
+    desc: "10% off all parts and accessories for Cal Poly and Cuesta students — just give them your school email.",
+    cost: "Discount",
+    link: "https://www.foothillcyclery.com/students",
+    map: "https://www.google.com/maps/search/?api=1&query=Foothill%20Cyclery%20Student%20Discount%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "SLO Beauty College",
+    category: "Discounts & Deals",
+    tags: ["wellness"],
+    desc: "A student-run cosmetology school with genuinely cheap services: $8 haircuts, $8 manicures, $15 pedicures, $25 facials.",
+    cost: "$",
+    link: "https://slobeautycollege.com/salon-services/",
+    map: "https://www.google.com/maps/search/?api=1&query=SLO%20Beauty%20College%20San%20Luis%20Obispo%20CA",
+    note: "Not a student-specific discount — just cheap for everyone."
+  },
+  {
+    title: "Palm Theatre Student Thursdays",
+    category: "Discounts & Deals",
+    tags: ["arts"],
+    desc: "$10 student tickets on Thursdays at the Palm Theatre / SLO Film Center (general is $12 after 5pm).",
+    cost: "Discount",
+    link: "https://thepalmtheatre.com/faq-and-accessibility/",
+    map: "https://www.google.com/maps/search/?api=1&query=Palm%20Theatre%20Student%20Thursdays%20San%20Luis%20Obispo%20CA",
+    note: "Also has a $9 Bargain Monday for everyone."
+  },
+  {
+    title: "BA Start Arcade & Taproom",
+    category: "Discounts & Deals",
+    tags: ["social"],
+    desc: "50+ retro and modern arcade games plus pool and pinball downtown — no cover charge, $3 draft beers.",
+    cost: "$",
+    link: "https://www.bastartarcadebar.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=BA%20Start%20Arcade%20%26%20Taproom%20San%20Luis%20Obispo%20CA",
+    note: "21+ after 9pm Thu–Sat."
+  },
+  {
+    title: "History Center of SLO County",
+    category: "Discounts & Deals",
+    tags: ["arts","free"],
+    desc: "Always-free admission (suggested donation) on Monterey St.",
+    cost: "Free",
+    link: "https://www.historycenterslo.org/",
+    map: "https://www.google.com/maps/search/?api=1&query=History%20Center%20of%20SLO%20County%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+
+  // ---------------- Happy Hour (21+) ----------------
+  {
+    title: "There Does Not Exist — Sunday Kölsch",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$3.50 Kölsch, all day Sunday. No food available per reports, so eat first.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=There%20Does%20Not%20Exist%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO happy hour thread, Aug 2026."
+  },
+  {
+    title: "Petra Happy Hour",
+    category: "Happy Hour (21+)",
+    tags: ["social","food"],
+    desc: "$3–4 drafts, reportedly 3–6pm daily.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Petra%20Happy%20Hour%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Firestone Grill — $4 Pints",
+    category: "Happy Hour (21+)",
+    tags: ["social","food"],
+    desc: "$4 pints, Monday–Friday, 2–6pm.",
+    cost: "Discount",
+    link: "https://firestonegrill.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=Firestone%20Grill%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Hoagies — $5 Beers",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$5 beers all day, every day — no happy-hour window needed.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Hoagies%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "SLO Cider Happy Hour",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$6 happy-hour pints.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=SLO%20Cider%20Happy%20Hour%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Beda's — 20% Off Beer",
+    category: "Happy Hour (21+)",
+    tags: ["social","food"],
+    desc: "20% off beer 2–6pm, plus a dedicated happy-hour food menu.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Beda's%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Green Bottle — $2 Off Brews",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "$2 off brews, 3–5pm.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Green%20Bottle%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Libertine — $1 Taco Tuesday",
+    category: "Happy Hour (21+)",
+    tags: ["social","food"],
+    desc: "$1 tacos on Tuesdays.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Libertine%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
+  },
+  {
+    title: "Oak and Otter Happy Hour",
+    category: "Happy Hour (21+)",
+    tags: ["social"],
+    desc: "Happy hour Monday–Friday 2–5pm, plus all day Sunday.",
+    cost: "Discount",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Oak%20and%20Otter%20Happy%20Hour%20San%20Luis%20Obispo%20CA",
+    note: "r/SLO, Aug 2026."
   },
 
   // ---------------- Transportation ----------------
   {
     title: "SLO Transit — Free for Students",
     category: "Transportation",
-    tags: ["free", "travel"],
+    tags: ["free","travel"],
     desc: "The city bus system is 100% free for Cal Poly students, subsidized by the university since 1985.",
     cost: "Free",
     link: "https://afd.calpoly.edu/parking/slo/commuting-to-campus/bus-services/rta-slo-transit",
@@ -474,7 +815,7 @@ const RESOURCES = [
   {
     title: "RTA Regional Transit Passes",
     category: "Transportation",
-    tags: ["free", "travel"],
+    tags: ["free","travel"],
     desc: "Free 1-day regional pass up to 3x/year, plus a heavily subsidized monthly pass for students who log alternative-commute trips.",
     cost: "Free",
     link: "https://afd.calpoly.edu/parking/slo/commuting-to-campus/bus-services/rta-slo-transit",
@@ -483,7 +824,7 @@ const RESOURCES = [
   {
     title: "Mustang Shuttle",
     category: "Transportation",
-    tags: ["free", "travel"],
+    tags: ["free","travel"],
     desc: "Free on-campus shuttle with day and night loops, recently expanded to two simultaneous routes with more stops.",
     cost: "Free",
     link: "https://afd.calpoly.edu/parking/slo/commuting-to-campus/bus-services/mustang-shuttle",
@@ -492,7 +833,7 @@ const RESOURCES = [
   {
     title: "Grocery Shuttle",
     category: "Transportation",
-    tags: ["free", "travel"],
+    tags: ["free","travel"],
     desc: "Free shuttle from campus to local grocery stores, Fridays and Sundays 10am–4pm during weeks 1–8 of winter/spring quarter.",
     cost: "Free",
     link: null,
@@ -501,18 +842,36 @@ const RESOURCES = [
   {
     title: "Bike Parking & Lockers",
     category: "Transportation",
-    tags: ["free", "outdoors"],
+    tags: ["free","outdoors"],
     desc: "Over 7,000 bike rack spaces plus 252 secure lockers across campus.",
     cost: "Free",
     link: "https://afd.calpoly.edu/parking/commutingtocampus/bikeparkingandstorage",
     note: null
+  },
+  {
+    title: "Zipcar at Cal Poly",
+    category: "Transportation",
+    tags: ["travel"],
+    desc: "9 Zipcars parked at campus locations including the Grand Ave Parking Structure — gas, insurance, and maintenance included.",
+    cost: "$",
+    link: "https://afd.calpoly.edu/parking/slo/commuting-to-campus/zipcar",
+    note: "$25/year student membership; rates from $8.75/hour or $72/day. Ages 18–20 get campus-only access; 21+ get nationwide access."
+  },
+  {
+    title: "Parking Permits",
+    category: "Transportation",
+    tags: ["free"],
+    desc: "How to actually get a permit: purchase through the My Cal Poly Portal under \"Money Matters.\" Commuter Long-Term permits are awarded through a randomized waitlist lottery; daily/weekly permits exist for infrequent commuters.",
+    cost: "$$",
+    link: "https://afd.calpoly.edu/parking/slo/parking-on-campus/permits/",
+    note: "First-year residents can't bring a car to campus at all and aren't eligible to buy a permit. Cal Poly Police have flagged a permit resale scam — TAPS is the only legitimate seller."
   },
 
   // ---------------- Clubs & Community ----------------
   {
     title: "ASI Club Directory",
     category: "Clubs & Community",
-    tags: ["community", "free"],
+    tags: ["community","free"],
     desc: "Over 400 recognized student clubs and organizations spanning academic, cultural, recreational, and service interests.",
     cost: "Free",
     link: "https://clubs.calpoly.edu/",
@@ -521,7 +880,7 @@ const RESOURCES = [
   {
     title: "Multicultural Center (MCC)",
     category: "Clubs & Community",
-    tags: ["community", "free"],
+    tags: ["community","free"],
     desc: "Support for historically underrepresented students — identity exploration, mentorship, and community-building programming.",
     cost: "Free",
     link: "https://multicultural.calpoly.edu/",
@@ -530,7 +889,7 @@ const RESOURCES = [
   {
     title: "Pride Center",
     category: "Clubs & Community",
-    tags: ["community", "wellness", "free"],
+    tags: ["community","wellness","free"],
     desc: "A coalition of spaces and orgs for LGBTQIA2S+ students — affinity groups, gender-affirming care resources, and basic needs support.",
     cost: "Free",
     link: "https://pride.calpoly.edu/",
@@ -539,18 +898,153 @@ const RESOURCES = [
   {
     title: "Gender Equity Center (GEC)",
     category: "Clubs & Community",
-    tags: ["community", "wellness", "free"],
+    tags: ["community","wellness","free"],
     desc: "Support and community space for women-identifying students, with intersectional identity programming.",
     cost: "Free",
     link: "https://gec.calpoly.edu/",
     note: null
+  },
+  {
+    title: "Cal Poly Racing (SAE)",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "The largest SAE International student chapter in California — fields both Baja SAE (off-road) and Formula SAE/Formula Electric teams that compete internationally.",
+    cost: "Free",
+    link: "https://www.calpolyracing.org/",
+    note: "120+ members; Formula IC placed 6th overall in 2023."
+  },
+  {
+    title: "Rose Float",
+    category: "Clubs & Community",
+    tags: ["community","arts"],
+    desc: "An ASI-funded program where students design and build Cal Poly's entry in the Tournament of Roses Parade jointly with Cal Poly Pomona — a tradition since 1949.",
+    cost: "Free",
+    link: "https://www.asi.calpoly.edu/get-involved/rose-float/",
+    note: "Draws roughly 200,000 in-person spectators and ~500 million TV viewers each year."
+  },
+  {
+    title: "PolySat / Cal Poly CubeSat Lab",
+    category: "Clubs & Community",
+    tags: ["community","tech","career"],
+    desc: "Student-run research lab that co-created the CubeSat standard with Stanford in 1999, now used by hundreds of organizations worldwide. Students handle full satellite lifecycle — design, build, test, launch.",
+    cost: "Free",
+    link: "https://www.polysat.org/apply",
+    note: "No prior experience required to apply."
+  },
+  {
+    title: "Cal Poly Space Systems (Rocketry)",
+    category: "Clubs & Community",
+    tags: ["community","tech"],
+    desc: "Rocketry club open to all majors — built Cal Poly's first club-developed liquid bipropellant rocket engine, plus solid-motor competition rockets, entirely student-designed and operated.",
+    cost: "Free",
+    link: "https://aero.calpoly.edu/cpss/",
+    note: null
+  },
+  {
+    title: "Design/Build/Fly",
+    category: "Clubs & Community",
+    tags: ["community","tech"],
+    desc: "Aerospace club that designs, builds, and flies remote-control aircraft for the international SAE Aero Design West competition against roughly 75 other teams.",
+    cost: "Free",
+    link: "https://aero.calpoly.edu/dbf/",
+    note: null
+  },
+  {
+    title: "Cal Poly Robotics Club",
+    category: "Clubs & Community",
+    tags: ["community","tech"],
+    desc: "Multidisciplinary club based in the Bonderson Projects Building, building robots for the annual Roborodentia competition.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Human Powered Vehicle (HPV) Club",
+    category: "Clubs & Community",
+    tags: ["community","outdoors"],
+    desc: "Founded in 1977, one of Cal Poly's oldest competitive engineering teams — builds aerodynamic speed bikes and hit 50.08 mph at the World Human Powered Speed Challenge in fall 2025.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Supermileage",
+    category: "Clubs & Community",
+    tags: ["community","tech"],
+    desc: "Multidisciplinary team designing hyper-efficient gas and electric vehicles for mileage competitions.",
+    cost: "Free",
+    link: "https://supermileage.calpoly.edu/",
+    note: null
+  },
+  {
+    title: "Society of Civil Engineers (SCE)",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "250+ member chapter that won the ASCE Robert Ridgway Student Chapter Award in May 2026 — Cal Poly's 8th win of this national top-chapter award. Runs the Concrete Canoe and Steel Bridge project teams.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Society of Women Engineers (SWE)",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "400+ members; Gold-level Outstanding Student Section nationally since 2010. Won Boeing's Team Tech national competition multiple years, including 1st place in 2022.",
+    cost: "Free",
+    link: "https://wep.calpoly.edu/cal-poly-society-women-engineers-awards",
+    note: null
+  },
+  {
+    title: "SHPE Cal Poly",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "Society of Hispanic Professional Engineers chapter established 1978 — one of the largest multicultural orgs on campus, named Outstanding Chapter of the Year 6 of the last 10 years.",
+    cost: "Free",
+    link: "http://shpe.calpoly.edu/about.html",
+    note: null
+  },
+  {
+    title: "NSBE Cal Poly",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "National Society of Black Engineers chapter, established 1974 — works to increase the number of Black engineers who excel academically and professionally.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Cal Poly Entrepreneurs",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "Student-run org providing workshops, mentorship, and weekly meetings for aspiring founders across all majors, affiliated with the campus Center for Innovation & Entrepreneurship.",
+    cost: "Free",
+    link: "https://calpolyentrepreneurs.com/",
+    note: "Weekly meetings, Tuesdays, Bldg 03 Business Silo."
+  },
+  {
+    title: "Cal Poly Investing Club",
+    category: "Clubs & Community",
+    tags: ["community","career"],
+    desc: "Founded 2013 — weekly meetings covering equity analysis, real estate, crypto, and startups, open to all years and majors.",
+    cost: "Free",
+    link: "https://www.calpolyinvesting.club/",
+    note: null
+  },
+  {
+    title: "Cal Poly STUNT Team",
+    category: "Clubs & Community",
+    tags: ["community","fitness"],
+    desc: "Competes in STUNT, a partner-stunt/tumbling sport recently approved by the NCAA as an emerging women's sport. Won the 2023 national championship as a #3 seed, upsetting top-seeded Oklahoma State twice in overtime.",
+    cost: "Free",
+    link: null,
+    note: "Not a varsity/scholarship sport at Cal Poly despite the national title."
   },
 
   // ---------------- Outdoors & Hikes ----------------
   {
     title: "Bishop Peak",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "3.5 miles round trip, the tallest of the Nine Sisters at 1,559 ft — the hardest of the classic SLO peak hikes.",
     cost: "Free",
     link: "https://www.alltrails.com/trail/us/california/bishop-peak-trail-from-highland-drive-trail",
@@ -559,7 +1053,7 @@ const RESOURCES = [
   {
     title: "Madonna Mountain (Cerro San Luis)",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "4 miles round trip up an ancient volcanic plug — steady incline, rocky, almost no shade.",
     cost: "Free",
     link: "https://hikespeak.com/trails/cerro-san-luis-hike/",
@@ -568,7 +1062,7 @@ const RESOURCES = [
   {
     title: "The Cal Poly \"P\" (Terrace Hill)",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free", "community"],
+    tags: ["outdoors","free","community"],
     desc: "A short 0.9-mile climb behind the dorms, built in 1919, to a sunset overlook of campus and the valley.",
     cost: "Free",
     link: "https://www.alltrails.com/trail/us/california/the-p--2",
@@ -577,7 +1071,7 @@ const RESOURCES = [
   {
     title: "Serenity Swing",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "3.8-mile route behind Poly Canyon leading to a literal swing with one of the best views of campus and SLO.",
     cost: "Free",
     link: null,
@@ -586,7 +1080,7 @@ const RESOURCES = [
   {
     title: "Reservoir Canyon Falls",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A 2-minute walk from the lot to a seasonal 30-foot waterfall, the tallest in SLO County — best after rain or in spring.",
     cost: "Free",
     link: "https://www.onxmaps.com/hiking/39yz3pollqlk/reservoir-canyon-falls",
@@ -595,7 +1089,7 @@ const RESOURCES = [
   {
     title: "Islay Hill",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "1.8 miles, easy/moderate switchbacks with Edna Valley views — one of the easiest of the volcanic peaks.",
     cost: "Free",
     link: "https://hikespeak.com/trails/islay-hill-san-luis-obispo/",
@@ -604,7 +1098,7 @@ const RESOURCES = [
   {
     title: "Pismo Preserve",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "880 acres and 11+ miles of hike/bike/horse trails with ocean views from the Irish Hills to Point Sal.",
     cost: "Free",
     link: "https://www.lcslo.org/pismo-preserve",
@@ -613,7 +1107,7 @@ const RESOURCES = [
   {
     title: "Prefumo Canyon Road",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free", "travel"],
+    tags: ["outdoors","free","travel"],
     desc: "A scenic hike, bike, or drive with a summit view stretching all the way to Morro Rock, 10 miles west.",
     cost: "Free",
     link: null,
@@ -622,7 +1116,7 @@ const RESOURCES = [
   {
     title: "Pirates Cove",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A small beach reached by a dirt trail, with a sea cave and tide pools — clothing-optional, and genuinely dangerous at high tide.",
     cost: "Free",
     link: null,
@@ -631,7 +1125,7 @@ const RESOURCES = [
   {
     title: "Poly Canyon / Architecture Graveyard",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "arts", "free", "community"],
+    tags: ["outdoors","arts","free","community"],
     desc: "A roughly 3-mile round trip into a 9-acre outdoor lab of ~20 decades-old student-built experimental structures, dating to 1964.",
     cost: "Free",
     link: "https://polycanyon.calpoly.edu/history",
@@ -640,7 +1134,7 @@ const RESOURCES = [
   {
     title: "Avila Beach",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "The warmest, calmest water on the Central Coast, with beginner-friendly surf at the pier.",
     cost: "Free",
     link: null,
@@ -649,7 +1143,7 @@ const RESOURCES = [
   {
     title: "Pismo Beach",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free", "social"],
+    tags: ["outdoors","free","social"],
     desc: "Wide sandy beach for swimming and bonfires — hosts the SLO CAL Open surf competition every January.",
     cost: "Free",
     link: null,
@@ -658,7 +1152,7 @@ const RESOURCES = [
   {
     title: "Shell Beach",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "Nine separate coves tucked below bluffs, most with tide pools exposed at low tide — quieter and more dramatic than Pismo.",
     cost: "Free",
     link: null,
@@ -667,7 +1161,7 @@ const RESOURCES = [
   {
     title: "Morro Bay & Morro Rock",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "travel", "free"],
+    tags: ["outdoors","travel","free"],
     desc: "A 576-foot, 23-million-year-old volcanic plug and protected peregrine falcon nesting site — the last of the Nine Sisters.",
     cost: "Free",
     link: null,
@@ -676,7 +1170,7 @@ const RESOURCES = [
   {
     title: "Morro Bay Kayaking",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "social"],
+    tags: ["outdoors","social"],
     desc: "A calm, protected estuary good for all skill levels, with reliable sea otter sightings near Target Rock.",
     cost: "$",
     link: null,
@@ -685,7 +1179,7 @@ const RESOURCES = [
   {
     title: "Montaña de Oro State Park",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "The Bluff Trail (2.1 miles, flat, coastal), Valencia Peak (4.5 miles round trip), and Hazard Canyon Reef — one of the best tide-pooling spots in the state.",
     cost: "Free",
     link: null,
@@ -694,7 +1188,7 @@ const RESOURCES = [
   {
     title: "Pismo Monarch Butterfly Grove",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "One of North America's largest overwintering monarch colonies — 20,000 to 200,000 butterflies, best viewing November through February.",
     cost: "Free",
     link: "https://www.parks.ca.gov/?page_id=30273",
@@ -703,7 +1197,7 @@ const RESOURCES = [
   {
     title: "Piedras Blancas Elephant Seal Rookery",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "free", "travel"],
+    tags: ["outdoors","free","travel"],
     desc: "A free, year-round colony now exceeding 25,000 elephant seals along 8 miles of coast near San Simeon.",
     cost: "Free",
     link: "https://www.elephantseal.org/",
@@ -712,7 +1206,7 @@ const RESOURCES = [
   {
     title: "Sycamore Mineral Springs",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "wellness"],
+    tags: ["outdoors","wellness"],
     desc: "23 private hillside mineral hot tubs (100–104°F), discovered by oil drillers in 1886.",
     cost: "$$",
     link: "https://www.sycamoresprings.com/",
@@ -721,229 +1215,108 @@ const RESOURCES = [
   {
     title: "Oceano Dunes SVRA",
     category: "Outdoors & Hikes",
-    tags: ["outdoors", "social"],
+    tags: ["outdoors","social"],
     desc: "The only California beach where you can legally drive an ATV or UTV directly on the sand.",
     cost: "$$",
     link: null,
     note: "Rentals available from outfitters in Oceano."
   },
-
-  // ---------------- Food & Local Spots ----------------
   {
-    title: "Bubblegum Alley",
-    category: "Food & Local Spots",
-    tags: ["arts", "free", "social"],
-    desc: "A 15-foot-high, 70-foot-long alley covered in chewed gum since the early 1970s — genuinely strange, genuinely SLO.",
+    title: "Righetti Hill Open Space",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A brand-new open space (opened May 2025) — 51 acres, 2+ miles of trails, and a Quarry Trail to a 563-ft summit with 360° views of Cerro San Luis, Bishop Peak, and Islay Hill.",
     cost: "Free",
     link: null,
-    note: "700 block of Higuera St."
+    note: "Genuinely new enough that most current students don't know about it yet. Trailhead at Hillside Dr & Twin Creek Rd."
   },
   {
-    title: "Madonna Inn",
-    category: "Food & Local Spots",
-    tags: ["social", "arts"],
-    desc: "The world's first \"theme\" motel, built in 1958 — 110 individually themed rooms and a famous waterfall urinal, plus swing dancing nights.",
-    cost: "$$",
-    link: null,
-    note: null
-  },
-  {
-    title: "SLO Thursday Night Farmers' Market",
-    category: "Food & Local Spots",
-    tags: ["food", "free", "social"],
-    desc: "Five blocks of downtown SLO shut down every Thursday, 6–9pm, with 100+ vendors, live music, and tri-tip smoke everywhere.",
-    cost: "Free",
-    link: null,
-    note: "Running since 1983."
-  },
-  {
-    title: "Apple Farm Restaurant & Bakery",
-    category: "Food & Local Spots",
-    tags: ["food"],
-    desc: "Legendary oversized, sticky cinnamon rolls baked fresh daily since 1977.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Mission San Luis Obispo de Tolosa",
-    category: "Food & Local Spots",
-    tags: ["arts", "free", "travel"],
-    desc: "The 5th California mission, founded by Junípero Serra in 1772 — free docent-led tours daily at 1:15pm.",
+    title: "Irish Hills Natural Reserve",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "720 acres and 8+ miles of trails — the Morro View Trail is 3.15 miles round trip with 850 ft of gain from the Prefumo Canyon trailhead.",
     cost: "Free",
     link: null,
     note: null
   },
   {
-    title: "Firestone Grill",
-    category: "Food & Local Spots",
-    tags: ["food"],
-    desc: "The definitive SLO tri-tip sandwich, repeatedly voted the best place to eat in town by student and local press.",
-    cost: "$",
+    title: "Cerro Cabrillo",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A 2.3-mile out-and-back near Morro Bay with a steep rock-scramble finish and 360° views. Trailhead on South Bay Blvd across from the Morro Estuary.",
+    cost: "Free",
     link: null,
     note: null
   },
   {
-    title: "Tio Alberto's",
-    category: "Food & Local Spots",
-    tags: ["food"],
-    desc: "Massive carne asada burritos loaded with rice, beans, guac, and sour cream — a late-night staple.",
-    cost: "$",
+    title: "Eagle Rock Nature Trail",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A 2.4-mile loop in El Chorro Regional Park, about 450 ft of gain and an hour round trip, past the botanical garden and dog park.",
+    cost: "Free",
     link: null,
     note: null
   },
   {
-    title: "Big Sky Cafe",
-    category: "Food & Local Spots",
-    tags: ["food"],
-    desc: "Under-$10 menu items, wheat pancakes for breakfast — voted best SLO restaurant by New Times readers.",
-    cost: "$",
+    title: "Cuesta Ridge Botanical Area",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A 6-mile round trip through a rare Sargent cypress \"elfin forest\" with views of 8 of the Nine Sisters — best in May–June for wildflowers.",
+    cost: "Free",
     link: null,
     note: null
   },
   {
-    title: "Gus's Grocery and Deli",
-    category: "Food & Local Spots",
-    tags: ["food"],
-    desc: "Build-your-own sandwiches in three sizes, plus homemade hot chips.",
+    title: "Bob Jones Trail (\"City to the Sea\")",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A paved, flat, family-friendly trail — about 6 miles round trip from Ontario Rd to the Avila Beach Promenade along SLO Creek.",
+    cost: "Free",
+    link: null,
+    note: "The easiest option on this whole list if you just want a flat walk or bike ride."
+  },
+  {
+    title: "Pecho Coast Trail → Point San Luis Lighthouse",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","travel"],
+    desc: "A 3.75-mile round trip, moderate to strenuous — but guided-only via PG&E docents, Wednesdays and Saturdays.",
     cost: "$",
+    link: "https://www.pointsanluislighthouse.org/hiking",
+    note: "Reserve at least 2 weeks ahead (805-528-8758). Optional $10 lighthouse tour add-on."
+  },
+  {
+    title: "Elfin Forest Natural Preserve",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A 1-mile ADA-accessible boardwalk loop in Los Osos, only 80 ft of gain, with views of Morro Bay, Hollister Peak, and Cerro Cabrillo.",
+    cost: "Free",
+    link: null,
+    note: "The most accessible hike on this list — genuinely wheelchair-friendly."
+  },
+  {
+    title: "Laguna Lake Park",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A 375-acre park with options from an easy 2.3-mile loop up to a strenuous connector all the way to the Cerro San Luis summit. Off-leash dog park on site.",
+    cost: "Free",
     link: null,
     note: null
   },
   {
-    title: "Sally Loo's",
-    category: "Food & Local Spots",
-    tags: ["food", "academic"],
-    desc: "Acai bowls and brunch near the train station — doubles as one of the best study spots in town.",
-    cost: "$",
+    title: "Lemon Grove–Rock Garden Loop",
+    category: "Outdoors & Hikes",
+    tags: ["outdoors","free"],
+    desc: "A roughly 4-mile loop starting at the Lemon Grove trailhead on Fernandez Lane, with an alternate approach from the Madonna Mountain side.",
+    cost: "Free",
     link: null,
-    note: "Some r/CalPoly students think it's overpriced for what you get — worth it for the vibe and the study space more than the food, per that discussion."
-  },
-  {
-    title: "SloDoCo",
-    category: "Food & Local Spots",
-    tags: ["food", "academic", "social"],
-    desc: "A 24-hour donut shop that's become a de facto all-night study spot — the maple bacon donut is a local favorite.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Linnaea's",
-    category: "Food & Local Spots",
-    tags: ["food", "arts"],
-    desc: "SLO's first coffee shop — live music and local art on every wall.",
-    cost: "$",
-    link: null,
-    note: "The banana bread latte is the specific student-recommended order — enjoy it in the back garden/porch."
+    note: "Recommended in Her Campus Cal Poly's student-written hiking guide."
   },
 
-  // ---------------- Day Trips & Traditions ----------------
-  {
-    title: "Hearst Castle",
-    category: "Day Trips & Traditions",
-    tags: ["travel", "arts"],
-    desc: "William Randolph Hearst's 115-room hilltop estate designed by Julia Morgan — multiple tour tracks starting at $35.",
-    cost: "$$",
-    link: "https://hearstcastle.org/tour-hearst-castle/tour-tickets-pricing/",
-    note: "Book up to 60 days out."
-  },
-  {
-    title: "Big Sur / McWay Falls",
-    category: "Day Trips & Traditions",
-    tags: ["travel", "outdoors"],
-    desc: "A short, flat trail to a waterfall dropping straight onto the beach — about a 1.25-hour drive up Highway 1.",
-    cost: "Free",
-    link: null,
-    note: "Doable as a long day trip if you start early."
-  },
-  {
-    title: "Solvang",
-    category: "Day Trips & Traditions",
-    tags: ["travel", "food"],
-    desc: "A Danish-themed village about 1.25 hours south — windmills, Danish bakeries, and wine-tasting rooms.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Paso Robles / Edna Valley Wine Tasting",
-    category: "Day Trips & Traditions",
-    tags: ["travel", "social"],
-    desc: "Cal Poly's own Cultivate program runs a spring-break wine tour hitting a dozen-plus wineries — some Paso wineries also run discounted student tasting programs.",
-    cost: "$$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Design Village",
-    category: "Day Trips & Traditions",
-    tags: ["arts", "community", "academic"],
-    desc: "A 48-hour student-built-structure competition held in Poly Canyon during Open House weekend each spring, open to ~400 students from 14+ schools.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "The Tri-Tip Challenge",
-    category: "Day Trips & Traditions",
-    tags: ["outdoors", "food", "community"],
-    desc: "A Cal Poly tradition: hike Bishop Peak, Madonna Mountain, and the P all in one day, then reward yourself with tri-tip at Firestone.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Blue-Green Rivalry (Cal Poly vs. UCSB)",
-    category: "Day Trips & Traditions",
-    tags: ["social", "community"],
-    desc: "A football and soccer rivalry dating to 1921 — called one of the greatest rivalries in NCAA soccer history.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Poly Royal Rodeo",
-    category: "Day Trips & Traditions",
-    tags: ["social", "community", "free"],
-    desc: "Cal Poly's rodeo program holds more national collegiate titles than any other school — the rodeo draws 15,000+ spectators each spring during Open House.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Open House (Poly Royal)",
-    category: "Day Trips & Traditions",
-    tags: ["social", "community", "free"],
-    desc: "Cal Poly's biggest annual event, tracing back to 1904 — booths, a tractor pull, and the rodeo.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "California Festival of Beers",
-    category: "Day Trips & Traditions",
-    tags: ["social"],
-    desc: "A 21+ springtime festival downtown, kicking off Memorial Day weekend.",
-    cost: "$$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Einstein Statue",
-    category: "Day Trips & Traditions",
-    tags: ["academic", "free", "community"],
-    desc: "A statue outside the Baker Center that students rub the head of for good luck before exams.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-
-  // ---------------- Hidden Gems (Reddit Intel) ----------------
+  // ---------------- Hidden Gems (Community Intel) ----------------
   {
     title: "Fischer Computer Lab",
     category: "Hidden Gems (Community Intel)",
-    tags: ["academic", "free", "tech"],
+    tags: ["academic","free","tech"],
     desc: "A quiet, rarely-crowded computer lab — one r/CalPoly regular admitted they're \"loathe to recommend this\" because they're usually the only one there.",
     cost: "Free",
     link: null,
@@ -952,7 +1325,7 @@ const RESOURCES = [
   {
     title: "Standing Desks: Building 186 & the UU Counters",
     category: "Hidden Gems (Community Intel)",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "Adjustable-height desks in Construction Innovation (Bldg 186, Room A215) when no class is meeting, plus standing counters throughout the University Union.",
     cost: "Free",
     link: null,
@@ -961,7 +1334,7 @@ const RESOURCES = [
   {
     title: "Empty Classroom Study Rotation",
     category: "Hidden Gems (Community Intel)",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "A finals-week trick from r/CalPoly: rotate through empty classrooms in Engineering IV, Frost, and Baker when you need a quiet room that isn't SloDoCo.",
     cost: "Free",
     link: null,
@@ -970,7 +1343,7 @@ const RESOURCES = [
   {
     title: "Front Porch Free Coffee & Tea",
     category: "Hidden Gems (Community Intel)",
-    tags: ["academic", "free", "wellness"],
+    tags: ["academic","free","wellness"],
     desc: "A volunteer-run coffee shop just off campus behind the Health Center — free tea, coffee, shared mugs, and quiet study seating.",
     cost: "Free",
     link: null,
@@ -979,7 +1352,7 @@ const RESOURCES = [
   {
     title: "Cal Poly Scholars Study Space",
     category: "Hidden Gems (Community Intel)",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "A quiet study space in the science building available specifically to Cal Poly Scholars.",
     cost: "Free",
     link: null,
@@ -988,7 +1361,7 @@ const RESOURCES = [
   {
     title: "Linnaea's Back Patio",
     category: "Hidden Gems (Community Intel)",
-    tags: ["academic", "food"],
+    tags: ["academic","food"],
     desc: "The specific reason to pick Linnaea's over other coffee shops, per r/CalPoly — the back patio, alongside the downtown library and Santa Rosa Park as other quiet off-campus options.",
     cost: "$",
     link: null,
@@ -997,7 +1370,7 @@ const RESOURCES = [
   {
     title: "Cal Poly Arboretum",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A genuinely overlooked green space on campus — one student posted they'd only just discovered it after years at Cal Poly.",
     cost: "Free",
     link: null,
@@ -1006,7 +1379,7 @@ const RESOURCES = [
   {
     title: "Kentwood Hill",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A small, little-known hill behind the senior-living development off Orcutt Rd, accessed via the Kentwood dead end — recommended by a local photographer for sunset shots.",
     cost: "Free",
     link: null,
@@ -1015,7 +1388,7 @@ const RESOURCES = [
   {
     title: "Coon Creek Trail, Montaña de Oro",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A hidden-gem trail within Montaña de Oro — six small bridges and very little elevation gain, good for a mellow hike.",
     cost: "Free",
     link: null,
@@ -1024,7 +1397,7 @@ const RESOURCES = [
   {
     title: "Los Osos Oaks State Natural Reserve",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A mostly-shaded, easier hike — a good pairing or alternative to a Montaña de Oro trip on a hot day.",
     cost: "Free",
     link: null,
@@ -1042,7 +1415,7 @@ const RESOURCES = [
   {
     title: "Point Buchon Trail",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "An unusual coastal trail through the old nuclear plant buffer zone, with views of the plant itself.",
     cost: "Free",
     link: null,
@@ -1051,7 +1424,7 @@ const RESOURCES = [
   {
     title: "Margo Dodd Park, Shell Beach",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "free"],
+    tags: ["outdoors","free"],
     desc: "A cliffside sunset viewpoint with a gazebo, recommended by a nearby resident as an underrated spot.",
     cost: "Free",
     link: null,
@@ -1060,7 +1433,7 @@ const RESOURCES = [
   {
     title: "Lampton Cliffs Beach, Cambria",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "travel", "free"],
+    tags: ["outdoors","travel","free"],
     desc: "A small, relatively secluded beach — pair it with a walk at nearby Fiscalini Ranch.",
     cost: "Free",
     link: null,
@@ -1069,7 +1442,7 @@ const RESOURCES = [
   {
     title: "Santa Margarita Lake Camping",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "social"],
+    tags: ["outdoors","social"],
     desc: "Called a genuine \"hidden gem\" for camping, with good hiking nearby too.",
     cost: "$",
     link: null,
@@ -1078,7 +1451,7 @@ const RESOURCES = [
   {
     title: "Rancho El Chorro Camping",
     category: "Hidden Gems (Community Intel)",
-    tags: ["outdoors", "social"],
+    tags: ["outdoors","social"],
     desc: "A pleasant, less-crowded camping spot recommended as an alternative to the busier sites.",
     cost: "$",
     link: null,
@@ -1087,7 +1460,7 @@ const RESOURCES = [
   {
     title: "Through Eyes of Glass (Stained Glass Classes)",
     category: "Hidden Gems (Community Intel)",
-    tags: ["arts", "social"],
+    tags: ["arts","social"],
     desc: "A stained-glass studio on South Street offering date-night classes, and occasional brewery classes too.",
     cost: "$$",
     link: null,
@@ -1102,8 +1475,212 @@ const RESOURCES = [
     link: null,
     note: "r/CalPoly, Nov 2024."
   },
+  {
+    title: "@slo.underground — Free All-Ages Local Shows",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts","social","free"],
+    desc: "An Instagram account posting free, all-ages local music shows around SLO — a real option for students who can't get into 21+ venues.",
+    cost: "Free",
+    link: null,
+    note: "This account reportedly took over after @slo.diy shut down — if an older guide points you to slo.diy, it's stale."
+  },
+  {
+    title: "The Bunker / MPU Underground Shows",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts","social"],
+    desc: "A student-run underground music scene (Music Production Union) hosting small, cheap local shows — a different vibe from the mainstream campus events calendar.",
+    cost: "$",
+    link: null,
+    note: "Watch @slo.underground and campus club Instagram accounts for current show listings — dates rotate."
+  },
+  {
+    title: "Club Fundraiser House Shows",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["arts","social","community"],
+    desc: "Cal Poly clubs like Engineers Without Borders occasionally run house-show fundraisers with live bands, cash or Venmo entry, and snacks — proceeds go straight to the club.",
+    cost: "$",
+    link: null,
+    note: "Follow club Instagram accounts directly — these aren't listed anywhere central."
+  },
+  {
+    title: "Cal Poly Unicycle Club",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["community","fitness","free"],
+    desc: "Yes, this is a real, active club (@cpunicycle) that hosts flatland competitions — about as niche and unexpected as Cal Poly clubs get.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "CPSalsa Beginner Dance Nights",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["social","fitness"],
+    desc: "Weekly bachata and salsa nights in Building 5, Room 225 — no experience or partner required, mixer included.",
+    cost: "$",
+    link: null,
+    note: "⚠️ One flyer showed conflicting student prices ($4 in the caption vs $7 on the image) — confirm the actual price with organizers before assuming either."
+  },
+  {
+    title: "Community Fruit Tree Maps",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["free","food","outdoors"],
+    desc: "SLO's community LocalWiki maintains maps of public fruit trees around town — loquats, figs, pineapple guava, persimmons, kumquats, avocados, and apples.",
+    cost: "Free",
+    link: null,
+    note: "Genuinely unique local knowledge — individual trees' access and ripeness will vary, so check before a special trip."
+  },
+  {
+    title: "Neighborhood Little Free Libraries",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["free","academic"],
+    desc: "Community-run book boxes around town, including ones at Mill & Toro, Broad & Pacific, and near Grand & Monterey.",
+    cost: "Free",
+    link: null,
+    note: "Based on an older community inventory — locations can change."
+  },
+  {
+    title: "Sharing SLO Community Directory",
+    category: "Hidden Gems (Community Intel)",
+    tags: ["free","community"],
+    desc: "A community-maintained directory of niche local resources: Table Ware Share (borrow event flatware), the SLO Seed Exchange, the SLO Produce Exchange, slacklining at Meadow Park, and lunchtime bocce at Emerson Park.",
+    cost: "Free",
+    link: null,
+    note: "Community-maintained leads — freshness varies, so double-check before counting on any one of them."
+  },
 
-  // ---------------- Local Food Finds (Reddit) ----------------
+  // ---------------- Food & Local Spots ----------------
+  {
+    title: "Bubblegum Alley",
+    category: "Food & Local Spots",
+    tags: ["arts","free","social"],
+    desc: "A 15-foot-high, 70-foot-long alley covered in chewed gum since the early 1970s — genuinely strange, genuinely SLO.",
+    cost: "Free",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Bubblegum%20Alley%20San%20Luis%20Obispo%20CA",
+    note: "700 block of Higuera St."
+  },
+  {
+    title: "Madonna Inn",
+    category: "Food & Local Spots",
+    tags: ["social","arts"],
+    desc: "The world's first \"theme\" motel, built in 1958 — 110 individually themed rooms and a famous waterfall urinal, plus swing dancing nights.",
+    cost: "$$",
+    link: "https://madonnainn.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=Madonna%20Inn%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "SLO Thursday Night Farmers' Market",
+    category: "Food & Local Spots",
+    tags: ["food","free","social"],
+    desc: "Five blocks of downtown SLO shut down every Thursday, 6–9pm, with 100+ vendors, live music, and tri-tip smoke everywhere.",
+    cost: "Free",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=SLO%20Thursday%20Night%20Farmers'%20Market%20San%20Luis%20Obispo%20CA",
+    note: "Running since 1983."
+  },
+  {
+    title: "Apple Farm Restaurant & Bakery",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "Legendary oversized, sticky cinnamon rolls baked fresh daily since 1977.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Apple%20Farm%20Restaurant%20%26%20Bakery%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Mission San Luis Obispo de Tolosa",
+    category: "Food & Local Spots",
+    tags: ["arts","free","travel"],
+    desc: "The 5th California mission, founded by Junípero Serra in 1772 — free docent-led tours daily at 1:15pm.",
+    cost: "Free",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Mission%20San%20Luis%20Obispo%20de%20Tolosa%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Firestone Grill",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "The definitive SLO tri-tip sandwich, repeatedly voted the best place to eat in town by student and local press.",
+    cost: "$",
+    link: "https://firestonegrill.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=Firestone%20Grill%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Tio Alberto's",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "Massive carne asada burritos loaded with rice, beans, guac, and sour cream — a late-night staple.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Tio%20Alberto's%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Big Sky Cafe",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "Under-$10 menu items, wheat pancakes for breakfast — voted best SLO restaurant by New Times readers.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Big%20Sky%20Cafe%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Gus's Grocery and Deli",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "Build-your-own sandwiches in three sizes, plus homemade hot chips.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Gus's%20Grocery%20and%20Deli%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Sally Loo's",
+    category: "Food & Local Spots",
+    tags: ["food","academic"],
+    desc: "Acai bowls and brunch near the train station — doubles as one of the best study spots in town.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Sally%20Loo's%20San%20Luis%20Obispo%20CA",
+    note: "Some r/CalPoly students think it's overpriced for what you get — worth it for the vibe and the study space more than the food, per that discussion."
+  },
+  {
+    title: "SloDoCo",
+    category: "Food & Local Spots",
+    tags: ["food","academic","social"],
+    desc: "A 24-hour donut shop that's become a de facto all-night study spot — the maple bacon donut is a local favorite.",
+    cost: "$",
+    link: "https://slodoco.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=SloDoCo%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Linnaea's",
+    category: "Food & Local Spots",
+    tags: ["food","arts"],
+    desc: "SLO's first coffee shop — live music and local art on every wall.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Linnaea's%20San%20Luis%20Obispo%20CA",
+    note: "The banana bread latte is the specific student-recommended order — enjoy it in the back garden/porch."
+  },
+  {
+    title: "1901 Marketplace",
+    category: "Food & Local Spots",
+    tags: ["food"],
+    desc: "A newer (2024) on-campus dining hub with 8 venues under one roof: 1901 Kitchen, Chick-fil-A, Panda Express, Pico's, PolyChoice, Pom & Honey, Red Radish, and Shake Smart.",
+    cost: "$",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=1901%20Marketplace%20San%20Luis%20Obispo%20CA",
+    note: "Recent enough that some students still don't know it exists."
+  },
+
+  // ---------------- Local Food Finds (Community Intel) ----------------
   {
     title: "Ebony Ethiopian Cuisine",
     category: "Local Food Finds (Community Intel)",
@@ -1111,6 +1688,7 @@ const RESOURCES = [
     desc: "Airport-area Ethiopian food, praised on r/CalPoly for vegan/gluten-free options and a lighter, less oily meal than most SLO food.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Ebony%20Ethiopian%20Cuisine%20San%20Luis%20Obispo%20CA",
     note: "Limited opening days reported — call ahead. (r/CalPoly, Jan 2024)"
   },
   {
@@ -1120,6 +1698,7 @@ const RESOURCES = [
     desc: "A specific breakfast burrito order the r/CalPoly food thread repeatedly points to.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Nautical%20Bean%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly, Jan 2024."
   },
   {
@@ -1129,6 +1708,7 @@ const RESOURCES = [
     desc: "Tandoori chicken recommended as good but somewhat pricey — the Monday-night buffet takeout is the better value, per multiple commenters.",
     cost: "$$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Shalimar%20San%20Luis%20Obispo%20CA",
     note: "A packed takeout container reportedly covers multiple meals. (r/CalPoly, Jan 2024 & Feb 2026)"
   },
   {
@@ -1138,24 +1718,27 @@ const RESOURCES = [
     desc: "A local's grouped recommendation for pizza, Thai, and Japanese respectively.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=My%20Friend%20Mike's%20%2F%20Thai%20Boat%20%2F%20Goshi%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly, Jan 2024."
   },
   {
     title: "Spoon Trade / Sister Thai Food Truck (Grover Beach)",
     category: "Local Food Finds (Community Intel)",
-    tags: ["food", "travel"],
+    tags: ["food","travel"],
     desc: "Two Grover Beach spots students say are worth the short drive out of SLO.",
     cost: "$$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Spoon%20Trade%20%2F%20Sister%20Thai%20Food%20Truck%20(Grover%20Beach)%20Grover%20Beach%20CA",
     note: "r/CalPoly, Jan 2024."
   },
   {
     title: "Las Comadres, Santa Maria",
     category: "Local Food Finds (Community Intel)",
-    tags: ["food", "travel"],
+    tags: ["food","travel"],
     desc: "Salvadoran pupusas, praised as both excellent and inexpensive.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Las%20Comadres%2C%20Santa%20Maria%20Santa%20Maria%20CA",
     note: "r/CalPoly, Jan 2024."
   },
   {
@@ -1165,6 +1748,7 @@ const RESOURCES = [
     desc: "Specific gluten-free pizza recommendations from students who actually need the option, not just a generic \"they probably have it.\"",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Petra%20%2F%20Del's%20(Pismo)%20Pismo%20Beach%20CA",
     note: "r/CalPoly, Jan 2024."
   },
   {
@@ -1174,164 +1758,157 @@ const RESOURCES = [
     desc: "BBQ sandwiches and chicken-fried steak, recommended in the same local food-finds thread.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=G%20Brothers%20BBQ%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly, Jan 2024."
   },
   {
     title: "Noi's 2nd Street Café → Spooner's Cove",
     category: "Local Food Finds (Community Intel)",
-    tags: ["food", "outdoors", "social"],
+    tags: ["food","outdoors","social"],
     desc: "A specific, repeatable outing students recommend: grab Thai food from Noi's, then eat it at Spooner's Cove in Montaña de Oro.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Noi's%202nd%20Street%20Caf%C3%A9%20%E2%86%92%20Spooner's%20Cove%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly visitor-itinerary thread, July 2025."
   },
-
-  // ---------------- Happy Hour (21+) ----------------
   {
-    title: "There Does Not Exist — Sunday Kölsch",
-    category: "Happy Hour (21+)",
-    tags: ["social"],
-    desc: "$3.50 Kölsch, all day Sunday. No food available per reports, so eat first.",
-    cost: "Discount",
+    title: "Honeymoon Cafe (Pismo)",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food","travel"],
+    desc: "A Pismo cafe on Price Street — the cowboy burrito and jackfruit banh mi bowl are the specific student-recommended orders.",
+    cost: "$",
     link: null,
-    note: "r/SLO happy hour thread, Aug 2026."
+    map: "https://www.google.com/maps/search/?api=1&query=Honeymoon%20Cafe%20(Pismo)%20Pismo%20Beach%20CA",
+    note: null
   },
   {
-    title: "Petra Happy Hour",
-    category: "Happy Hour (21+)",
-    tags: ["social", "food"],
-    desc: "$3–4 drafts, reportedly 3–6pm daily.",
-    cost: "Discount",
+    title: "Cal Poly Creamery Friday Drive-Through",
+    category: "Local Food Finds (Community Intel)",
+    tags: ["food"],
+    desc: "Most Fridays, noon–4pm: student-made ice cream (single scoop $6, double $8, pints $9), a $12 cheese \"Odds & Ends\" box, plus student-made summer sausage and chocolate.",
+    cost: "$",
     link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "Firestone Grill — $4 Pints",
-    category: "Happy Hour (21+)",
-    tags: ["social", "food"],
-    desc: "$4 pints, Monday–Friday, 2–6pm.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "Hoagies — $5 Beers",
-    category: "Happy Hour (21+)",
-    tags: ["social"],
-    desc: "$5 beers all day, every day — no happy-hour window needed.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "SLO Cider Happy Hour",
-    category: "Happy Hour (21+)",
-    tags: ["social"],
-    desc: "$6 happy-hour pints.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "Beda's — 20% Off Beer",
-    category: "Happy Hour (21+)",
-    tags: ["social", "food"],
-    desc: "20% off beer 2–6pm, plus a dedicated happy-hour food menu.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "Green Bottle — $2 Off Brews",
-    category: "Happy Hour (21+)",
-    tags: ["social"],
-    desc: "$2 off brews, 3–5pm.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "Libertine — $1 Taco Tuesday",
-    category: "Happy Hour (21+)",
-    tags: ["social", "food"],
-    desc: "$1 tacos on Tuesdays.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
-  },
-  {
-    title: "Oak and Otter Happy Hour",
-    category: "Happy Hour (21+)",
-    tags: ["social"],
-    desc: "Happy hour Monday–Friday 2–5pm, plus all day Sunday.",
-    cost: "Discount",
-    link: null,
-    note: "r/SLO, Aug 2026."
+    map: "https://www.google.com/maps/search/?api=1&query=Cal%20Poly%20Creamery%20Friday%20Drive-Through%20San%20Luis%20Obispo%20CA",
+    note: "Check the Creamery's current page before going — hours are \"most Fridays,\" not guaranteed every week."
   },
 
-  // ---------------- More Discounts (Reddit-Reported — verify before relying on) ----------------
+  // ---------------- Day Trips & Traditions ----------------
   {
-    title: "Old SLO BBQ — Student Discount",
-    category: "Discounts & Deals",
-    tags: ["food"],
-    desc: "10% off with a student ID, per a recent r/CalPoly report.",
-    cost: "Discount",
-    link: null,
-    note: "Reported Aug 2025 — worth confirming it's still running before you count on it."
+    title: "Hearst Castle",
+    category: "Day Trips & Traditions",
+    tags: ["travel","arts"],
+    desc: "William Randolph Hearst's 115-room hilltop estate designed by Julia Morgan — multiple tour tracks starting at $35.",
+    cost: "$$",
+    link: "https://hearstcastle.org/tour-hearst-castle/tour-tickets-pricing/",
+    note: "Book up to 60 days out."
   },
   {
-    title: "High Street Deli — After 4:20pm",
-    category: "Discounts & Deals",
-    tags: ["food"],
-    desc: "Discounted sandwiches late in the day — one commenter called it close to half off.",
-    cost: "Discount",
+    title: "Big Sur / McWay Falls",
+    category: "Day Trips & Traditions",
+    tags: ["travel","outdoors"],
+    desc: "A short, flat trail to a waterfall dropping straight onto the beach — about a 1.25-hour drive up Highway 1.",
+    cost: "Free",
     link: null,
-    note: "The daily special is reportedly excluded, and the window before closing is short — order ahead. (r/CalPoly, Feb 2026)"
+    note: "Doable as a long day trip if you start early."
   },
   {
-    title: "Sprouts — $5 Sandwiches & Wednesday Sushi",
-    category: "Discounts & Deals",
-    tags: ["food"],
-    desc: "$5 sandwiches, plus a Wednesday sushi deal.",
-    cost: "Discount",
+    title: "Solvang",
+    category: "Day Trips & Traditions",
+    tags: ["travel","food"],
+    desc: "A Danish-themed village about 1.25 hours south — windmills, Danish bakeries, and wine-tasting rooms.",
+    cost: "$",
     link: null,
-    note: "r/CalPoly, Feb 2026."
+    note: null
   },
   {
-    title: "Fatte's — Two-for-One Pizza",
-    category: "Discounts & Deals",
-    tags: ["food"],
-    desc: "A reported two-for-one pizza deal.",
-    cost: "Discount",
+    title: "Paso Robles / Edna Valley Wine Tasting",
+    category: "Day Trips & Traditions",
+    tags: ["travel","social"],
+    desc: "Cal Poly's own Cultivate program runs a spring-break wine tour hitting a dozen-plus wineries — some Paso wineries also run discounted student tasting programs.",
+    cost: "$$",
     link: null,
-    note: "r/CalPoly, Feb 2026 — confirm current terms."
+    note: null
   },
   {
-    title: "Eureka — Kids' Meal & Happy Hour",
-    category: "Discounts & Deals",
-    tags: ["food"],
-    desc: "A $10 kids' burger/fries/drink combo ordered online, and separately a $13 burger-and-fries happy hour with $8.50 cocktails.",
-    cost: "Discount",
+    title: "Design Village",
+    category: "Day Trips & Traditions",
+    tags: ["arts","community","academic"],
+    desc: "A 48-hour student-built-structure competition held in Poly Canyon during Open House weekend each spring, open to ~400 students from 14+ schools.",
+    cost: "Free",
     link: null,
-    note: "r/CalPoly, Aug 2025 & Feb 2026."
+    note: null
   },
   {
-    title: "Piadina / Hotel SLO Rooftop — Monday Pizza",
-    category: "Discounts & Deals",
-    tags: ["food", "social"],
-    desc: "A reported half-price (possibly BOGO) Monday pizza deal on the rooftop.",
-    cost: "Discount",
+    title: "The Tri-Tip Challenge",
+    category: "Day Trips & Traditions",
+    tags: ["outdoors","food","community"],
+    desc: "A Cal Poly tradition: hike Bishop Peak, Madonna Mountain, and the P all in one day, then reward yourself with tri-tip at Firestone.",
+    cost: "$",
     link: null,
-    note: "Reports differ on exact format between 2025 and 2026 — verify when you go. (r/CalPoly, Sept 2026)"
+    note: null
   },
   {
-    title: "SLOeats App Referral Code",
-    category: "Discounts & Deals",
-    tags: ["food", "tech"],
-    desc: "A student-shared referral code (FARMERS) reportedly unlocked a free month of premium and BOGO deals on the local food-ordering app SLOeats.",
-    cost: "Discount",
+    title: "Blue-Green Rivalry (Cal Poly vs. UCSB)",
+    category: "Day Trips & Traditions",
+    tags: ["social","community"],
+    desc: "A football and soccer rivalry dating to 1921 — called one of the greatest rivalries in NCAA soccer history.",
+    cost: "$",
     link: null,
-    note: "⚠️ Reported by students in 2023 — current validity unverified. Try it, but don't count on it."
+    note: null
+  },
+  {
+    title: "Poly Royal Rodeo",
+    category: "Day Trips & Traditions",
+    tags: ["social","community","free"],
+    desc: "Cal Poly's rodeo program holds more national collegiate titles than any other school — the rodeo draws 15,000+ spectators each spring during Open House.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Open House (Poly Royal)",
+    category: "Day Trips & Traditions",
+    tags: ["social","community","free"],
+    desc: "Cal Poly's biggest annual event, tracing back to 1904 — booths, a tractor pull, and the rodeo.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "California Festival of Beers",
+    category: "Day Trips & Traditions",
+    tags: ["social"],
+    desc: "A 21+ springtime festival downtown, kicking off Memorial Day weekend.",
+    cost: "$$",
+    link: null,
+    note: null
+  },
+  {
+    title: "Einstein Statue",
+    category: "Day Trips & Traditions",
+    tags: ["academic","free","community"],
+    desc: "A statue outside the Baker Center that students rub the head of for good luck before exams.",
+    cost: "Free",
+    link: null,
+    note: null
+  },
+  {
+    title: "Bike Night (First Thursday)",
+    category: "Day Trips & Traditions",
+    tags: ["social","outdoors","free"],
+    desc: "A monthly community bike ride on the first Thursday of the month, right after the Farmers' Market wraps up — a free, low-key social alternative to bar-hopping.",
+    cost: "Free",
+    link: null,
+    note: "Reported on by KCPR, Cal Poly's student radio station."
+  },
+  {
+    title: "SLO Little 500",
+    category: "Day Trips & Traditions",
+    tags: ["community","social"],
+    desc: "A local underground bicycle relay tradition — four-person teams sharing one bicycle, in costume, competing for a trophy teams add to year after year. Announcements are deliberately scattered across social media rather than centrally listed.",
+    cost: "Free",
+    link: null,
+    note: "Documented by New Times SLO as a genuine local subculture worth knowing about."
   },
 
   // ---------------- Real Talk: Skip It ----------------
@@ -1342,6 +1919,7 @@ const RESOURCES = [
     desc: "One of the most-agreed-on \"overrated\" call-outs on r/CalPoly — small portions, underwhelming sides, high prices, specifically at the Grover Beach location.",
     cost: "$$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Rib%20Line%20(Grover%20Beach)%20Grover%20Beach%20CA",
     note: "r/CalPoly \"worst restaurants\" thread, Oct 2024 — strong agreement in the comments."
   },
   {
@@ -1350,7 +1928,8 @@ const RESOURCES = [
     tags: ["food"],
     desc: "The rooms and photo-ops are worth it, but the food gets real criticism — steaks called too salty and overpriced, cake called dry.",
     cost: "$$",
-    link: null,
+    link: "https://madonnainn.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=Madonna%20Inn%20Dining%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly, Oct 2024. Go for the vibe, not the menu."
   },
   {
@@ -1360,6 +1939,7 @@ const RESOURCES = [
     desc: "Good taste, but reported high prices, 20–30 minute waits, and order mistakes.",
     cost: "$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=House%20of%20Bagels%20San%20Luis%20Obispo%20CA",
     note: "One account, Oct 2024 — take as one data point, not consensus."
   },
   {
@@ -1369,6 +1949,7 @@ const RESOURCES = [
     desc: "Called overpriced and bland by at least one r/CalPoly commenter.",
     cost: "$$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Flour%20House%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly, May 2024."
   },
   {
@@ -1378,6 +1959,7 @@ const RESOURCES = [
     desc: "Genuinely mixed — one thread calls it a bad pick for an expensive night out, another recommends it highly and a reply says they loved it. Manage expectations either way.",
     cost: "$$$",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Ox%20%2B%20Anchor%20for%20a%20Special%20Occasion%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly fine-dining discussion, April 2025."
   },
   {
@@ -1386,26 +1968,59 @@ const RESOURCES = [
     tags: ["food"],
     desc: "Firestone is beloved (see Food & Local Spots) — but it's also been called SLO's most overrated restaurant by some, even as others strongly defend the tri-tip sandwich and fries.",
     cost: "$",
-    link: null,
+    link: "https://firestonegrill.com/",
+    map: "https://www.google.com/maps/search/?api=1&query=Firestone%20Grill%20San%20Luis%20Obispo%20CA",
     note: "r/CalPoly \"best/worst\" thread, April 2024 — read both sides and judge for yourself."
   },
   {
     title: "Pismo Beach as \"The\" Beach Trip",
     category: "Real Talk: Skip It",
-    tags: ["outdoors", "travel"],
+    tags: ["outdoors","travel"],
     desc: "Strong \"overrated\" sentiment as the default beach destination — parking and crowds are the main complaints. Shell Beach or Avila get suggested instead.",
     cost: "Free",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Pismo%20Beach%20as%20%22The%22%20Beach%20Trip%20Pismo%20Beach%20CA",
     note: "r/CalPoly, April 2024 — one of the more strongly-agreed takes in that thread."
   },
   {
     title: "Local Creek Swimming — Water Quality",
     category: "Real Talk: Skip It",
-    tags: ["outdoors", "wellness"],
+    tags: ["outdoors","wellness"],
     desc: "A commenter claiming experience measuring SLO Creek bacteria said they personally avoid local streams; others pushed back on how bad specific creeks actually are.",
     cost: "Free",
     link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Local%20Creek%20Swimming%20San%20Luis%20Obispo%20CA",
     note: "A concern worth being aware of, not a confirmed water-quality finding. (r/CalPoly, April 2022)"
+  },
+  {
+    title: "E-Scooters: They Don't Exist Here",
+    category: "Real Talk: Skip It",
+    tags: ["travel"],
+    desc: "Don't waste time looking for Lime or Bird — SLO has repeatedly and explicitly blocked dockless e-scooter companies from operating in the city (most recently reported again in 2023).",
+    cost: "Free",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=E-Scooters%3A%20They%20Don't%20Exist%20Here%20San%20Luis%20Obispo%20CA",
+    note: "A 2019 city-approved bike-share pilot also never actually launched."
+  },
+  {
+    title: "Hollister Peak: You Can't Hike This One",
+    category: "Real Talk: Skip It",
+    tags: ["outdoors"],
+    desc: "It looks like an obvious hike from the highway, but Hollister Peak is private property with no legal public access — only occasional docent-led hikes via The Land Conservancy.",
+    cost: "Free",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Hollister%20Peak%3A%20You%20Can't%20Hike%20This%20One%20San%20Luis%20Obispo%20CA",
+    note: null
+  },
+  {
+    title: "Downtown Centre Cinema — Currently Closed",
+    category: "Real Talk: Skip It",
+    tags: ["arts"],
+    desc: "The historic $6 Discount Tuesday / $10 Sunday College Night deals are real, but the theater has been closed for renovation since early 2026 — don't show up expecting it to be open.",
+    cost: "Free",
+    link: null,
+    map: "https://www.google.com/maps/search/?api=1&query=Downtown%20Centre%20Cinema%20San%20Luis%20Obispo%20CA",
+    note: "Reportedly expected to reopen around the holidays in 2026 — verify before planning around it."
   },
 
   // ---------------- Know Before You Register ----------------
@@ -1475,7 +2090,7 @@ const RESOURCES = [
   {
     title: "Dining Dollars ≠ Meal Swipes",
     category: "Know Before You Register",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "Dining Dollars work like a cash balance, not a per-meal swipe — easy to misunderstand as an incoming student.",
     cost: "Free",
     link: null,
@@ -1491,20 +2106,20 @@ const RESOURCES = [
     note: "This was reported under the old quarter system (r/CalPoly, March 2025) — confirm how it applies under semesters before assuming your balance is safe."
   },
   {
-    title: "Grand Avenue Deli Price Increases",
+    title: "Communal Laundry Frustrations (PCV)",
     category: "Know Before You Register",
-    tags: ["food"],
-    desc: "Returning students have flagged noticeable price increases and fewer customization options at on-campus dining spots like Grand Avenue Deli.",
+    tags: ["community"],
+    desc: "A recurring complaint in campus social media: clothes pulled out of shared dryers by other residents while still wet, sometimes with real time left on the cycle.",
     cost: "Free",
     link: null,
-    note: "r/CalPoly, Jan 2025 — worth factoring into your meal plan budget expectations."
+    note: "Set a phone timer and try to be back right when your cycle ends — a common workaround students mention."
   },
 
   // ---------------- Freshman Regrets & Underused Benefits ----------------
   {
     title: "Free Campus Printing Spots",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["free", "academic"],
+    tags: ["free","academic"],
     desc: "Several offices offer free printing most students never think to use: the MCC, Pride Center, the Scholars office (Bldg 52), and the Multicultural Engineering Program office (Bldg 40). The Transfer Center also offers a small free print allowance.",
     cost: "Free",
     link: null,
@@ -1513,7 +2128,7 @@ const RESOURCES = [
   {
     title: "Library Textbook Reserves",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["free", "academic"],
+    tags: ["free","academic"],
     desc: "Some assigned textbooks are available free through the library's course reserves — worth checking before buying.",
     cost: "Free",
     link: null,
@@ -1522,7 +2137,7 @@ const RESOURCES = [
   {
     title: "Library Equipment & Interlibrary Loan",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["free", "academic"],
+    tags: ["free","academic"],
     desc: "Scantrons, calculators, and phone/laptop chargers are available at the library, and interlibrary loan can get you physical books even during on-campus construction disruptions.",
     cost: "Free",
     link: null,
@@ -1531,7 +2146,7 @@ const RESOURCES = [
   {
     title: "Free/Discounted Software (SPSS, ArcGIS Pro)",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["free", "tech", "academic"],
+    tags: ["free","tech","academic"],
     desc: "Some departments provide free licenses for expensive software like SPSS and ArcGIS Pro that students often don't realize they're entitled to.",
     cost: "Free",
     link: null,
@@ -1540,7 +2155,7 @@ const RESOURCES = [
   {
     title: "Free Campus Yoga",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["free", "fitness", "wellness"],
+    tags: ["free","fitness","wellness"],
     desc: "Free yoga classes flagged by students as a genuinely underused benefit, separate from the general Rec Center group fitness schedule.",
     cost: "Free",
     link: null,
@@ -1549,7 +2164,7 @@ const RESOURCES = [
   {
     title: "EOP Deadline Awareness",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["academic", "free"],
+    tags: ["academic","free"],
     desc: "One incoming student estimated missing the EOP (Educational Opportunity Program) application deadline cost them roughly $1,000 in potential support.",
     cost: "Free",
     link: null,
@@ -1558,7 +2173,7 @@ const RESOURCES = [
   {
     title: "SHPE, TRIO & Cultural Community Groups",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["community", "free"],
+    tags: ["community","free"],
     desc: "Students specifically credit groups like SHPE, TRIO, and Polycultural WOW with making Cal Poly feel like home — recommended especially for students unsure where they fit.",
     cost: "Free",
     link: null,
@@ -1567,579 +2182,19 @@ const RESOURCES = [
   {
     title: "What Seniors Wish They Knew as Freshmen",
     category: "Freshman Regrets & Underused Benefits",
-    tags: ["community", "academic"],
+    tags: ["community","academic"],
     desc: "The most common regrets from a big r/CalPoly thread: join something early, protect your GPA if you might need to change majors (ICMA eligibility), reconsider your major early if you're not enjoying the classes, try an internship in your field before senior year, and use counseling services before things get bad — not after.",
     cost: "Free",
     link: null,
     note: "\"I wish I went [to] counseling services much sooner.\" — r/CalPoly, July 2019."
   },
-
-  // ---------------- Notable Project Teams & Clubs ----------------
   {
-    title: "Cal Poly Racing (SAE)",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "The largest SAE International student chapter in California — fields both Baja SAE (off-road) and Formula SAE/Formula Electric teams that compete internationally.",
+    title: "WASH-Alert Laundry Tracker",
+    category: "Freshman Regrets & Underused Benefits",
+    tags: ["free","tech"],
+    desc: "Check which dorm/apartment washers and dryers are actually free in real time, and get a text or email the moment your load is done, instead of walking down to check.",
     cost: "Free",
-    link: "https://www.calpolyracing.org/",
-    note: "120+ members; Formula IC placed 6th overall in 2023."
-  },
-  {
-    title: "Rose Float",
-    category: "Clubs & Community",
-    tags: ["community", "arts"],
-    desc: "An ASI-funded program where students design and build Cal Poly's entry in the Tournament of Roses Parade jointly with Cal Poly Pomona — a tradition since 1949.",
-    cost: "Free",
-    link: "https://www.asi.calpoly.edu/get-involved/rose-float/",
-    note: "Draws roughly 200,000 in-person spectators and ~500 million TV viewers each year."
-  },
-  {
-    title: "PolySat / Cal Poly CubeSat Lab",
-    category: "Clubs & Community",
-    tags: ["community", "tech", "career"],
-    desc: "Student-run research lab that co-created the CubeSat standard with Stanford in 1999, now used by hundreds of organizations worldwide. Students handle full satellite lifecycle — design, build, test, launch.",
-    cost: "Free",
-    link: "https://www.polysat.org/apply",
-    note: "No prior experience required to apply."
-  },
-  {
-    title: "Cal Poly Space Systems (Rocketry)",
-    category: "Clubs & Community",
-    tags: ["community", "tech"],
-    desc: "Rocketry club open to all majors — built Cal Poly's first club-developed liquid bipropellant rocket engine, plus solid-motor competition rockets, entirely student-designed and operated.",
-    cost: "Free",
-    link: "https://aero.calpoly.edu/cpss/",
-    note: null
-  },
-  {
-    title: "Design/Build/Fly",
-    category: "Clubs & Community",
-    tags: ["community", "tech"],
-    desc: "Aerospace club that designs, builds, and flies remote-control aircraft for the international SAE Aero Design West competition against roughly 75 other teams.",
-    cost: "Free",
-    link: "https://aero.calpoly.edu/dbf/",
-    note: null
-  },
-  {
-    title: "Cal Poly Robotics Club",
-    category: "Clubs & Community",
-    tags: ["community", "tech"],
-    desc: "Multidisciplinary club based in the Bonderson Projects Building, building robots for the annual Roborodentia competition.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Human Powered Vehicle (HPV) Club",
-    category: "Clubs & Community",
-    tags: ["community", "outdoors"],
-    desc: "Founded in 1977, one of Cal Poly's oldest competitive engineering teams — builds aerodynamic speed bikes and hit 50.08 mph at the World Human Powered Speed Challenge in fall 2025.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Cal Poly Supermileage",
-    category: "Clubs & Community",
-    tags: ["community", "tech"],
-    desc: "Multidisciplinary team designing hyper-efficient gas and electric vehicles for mileage competitions.",
-    cost: "Free",
-    link: "https://supermileage.calpoly.edu/",
-    note: null
-  },
-  {
-    title: "Society of Civil Engineers (SCE)",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "250+ member chapter that won the ASCE Robert Ridgway Student Chapter Award in May 2026 — Cal Poly's 8th win of this national top-chapter award. Runs the Concrete Canoe and Steel Bridge project teams.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Cal Poly Society of Women Engineers (SWE)",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "400+ members; Gold-level Outstanding Student Section nationally since 2010. Won Boeing's Team Tech national competition multiple years, including 1st place in 2022.",
-    cost: "Free",
-    link: "https://wep.calpoly.edu/cal-poly-society-women-engineers-awards",
-    note: null
-  },
-  {
-    title: "SHPE Cal Poly",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "Society of Hispanic Professional Engineers chapter established 1978 — one of the largest multicultural orgs on campus, named Outstanding Chapter of the Year 6 of the last 10 years.",
-    cost: "Free",
-    link: "http://shpe.calpoly.edu/about.html",
-    note: null
-  },
-  {
-    title: "NSBE Cal Poly",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "National Society of Black Engineers chapter, established 1974 — works to increase the number of Black engineers who excel academically and professionally.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Cal Poly Entrepreneurs",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "Student-run org providing workshops, mentorship, and weekly meetings for aspiring founders across all majors, affiliated with the campus Center for Innovation & Entrepreneurship.",
-    cost: "Free",
-    link: "https://calpolyentrepreneurs.com/",
-    note: "Weekly meetings, Tuesdays, Bldg 03 Business Silo."
-  },
-  {
-    title: "Cal Poly Investing Club",
-    category: "Clubs & Community",
-    tags: ["community", "career"],
-    desc: "Founded 2013 — weekly meetings covering equity analysis, real estate, crypto, and startups, open to all years and majors.",
-    cost: "Free",
-    link: "https://www.calpolyinvesting.club/",
-    note: null
-  },
-  {
-    title: "Cal Poly STUNT Team",
-    category: "Clubs & Community",
-    tags: ["community", "fitness"],
-    desc: "Competes in STUNT, a partner-stunt/tumbling sport recently approved by the NCAA as an emerging women's sport. Won the 2023 national championship as a #3 seed, upsetting top-seeded Oklahoma State twice in overtime.",
-    cost: "Free",
-    link: null,
-    note: "Not a varsity/scholarship sport at Cal Poly despite the national title."
-  },
-
-  // ---------------- College-Specific Resources ----------------
-  {
-    title: "CAFES Advising Center",
-    category: "Academic & Career Help",
-    tags: ["academic", "free"],
-    desc: "Advising specifically for Agriculture, Food & Environmental Sciences students (Bldg 80-M) — serves transfer and 2nd-year+ students. Also runs the Multicultural Agriculture Program (MAP): peer mentoring, quarterly workshops, and career events.",
-    cost: "Free",
-    link: "https://cafes.calpoly.edu/student-services/academic-advising",
-    note: "1st-years use the university-wide Mustang Success Center instead."
-  },
-  {
-    title: "CLA Advising Center",
-    category: "Academic & Career Help",
-    tags: ["academic", "free"],
-    desc: "Advising for Liberal Arts students (Bldg 47, Rm 36R) with Zoom drop-ins and peer advisors. Also partners with College Possible Catalyze for near-peer success coaching, with a stated focus on men of color.",
-    cost: "Free",
-    link: "https://cla.calpoly.edu/advising",
-    note: "Drop-ins: M–Tu 10–noon, W–Th 2–4pm."
-  },
-  {
-    title: "CAED Advising Center",
-    category: "Academic & Career Help",
-    tags: ["academic", "free"],
-    desc: "Open-door advising (Bldg 05, Rm 210, M–F 9am–4pm) for all 5 CAED majors, plus a peer-mentoring \"Buddy Program\" for belonging and connection.",
-    cost: "Free",
-    link: "https://caed.calpoly.edu/caed-advising",
-    note: null
-  },
-  {
-    title: "Disability Resource Center (DRC)",
-    category: "Wellness & Basic Needs",
-    tags: ["wellness", "academic", "free"],
-    desc: "Handles accommodations: alternative media and notetaking, test accommodations, extended due dates, reduced course load, assistive technology, sign language interpreting, housing/dining accommodations, and a Strategic Coaching Program.",
-    cost: "Free",
-    link: "https://drc.calpoly.edu/content/drc-services",
-    note: "Building 124. Requests go through an intake appointment via the My Cal Poly Portal — accommodations can't be retroactive, so start early."
-  },
-  {
-    title: "Scholarship QuickLink",
-    category: "Academic & Career Help",
-    tags: ["academic", "free"],
-    desc: "Cal Poly's actual scholarship mechanism — continuing students apply each March through a tool inside the My Cal Poly Portal, matched largely by college/major. New students are auto-considered on admission.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Textbook Rental & Buyback (El Corral)",
-    category: "Academic & Career Help",
-    tags: ["academic", "free"],
-    desc: "The campus bookstore offers textbook rentals typically under half the new price, plus an end-of-term buyback program for cash or store credit.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "CashCourse",
-    category: "Academic & Career Help",
-    tags: ["academic", "free"],
-    desc: "Free financial-literacy platform through Campus Health & Wellbeing — budgeting tools, calculators, and quizzes.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Frost Summer Undergraduate Research Program",
-    category: "Academic & Career Help",
-    tags: ["academic", "career"],
-    desc: "Funded by the $110M Bill & Linda Frost gift. Frost Research Scholars get a $10,000 scholarship including a guaranteed $4,500 SURP stipend for summer research.",
-    cost: "Free",
-    link: null,
-    note: "Cal Poly-wide, more than 1,200 students are paid roughly $1.4 million annually for research work."
-  },
-  {
-    title: "LSAMP Research Scholars Program",
-    category: "Academic & Career Help",
-    tags: ["academic", "career"],
-    desc: "A $4,000 stipend for Winter/Spring quarter research with a Cal Poly faculty mentor, for LSAMP-eligible (generally underrepresented STEM) students.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Study Abroad / International Center",
-    category: "Academic & Career Help",
-    tags: ["academic", "travel"],
-    desc: "Multiple program tracks — faculty-led Global Programs, bilateral exchanges, third-party Partner Programs, CSU International Programs, and National Student Exchange (a ~200-school US/Canada/territories consortium). \"First Year GO\" is an entry-level option for freshmen.",
-    cost: "$$",
-    link: "https://abroad.calpoly.edu/",
-    note: "Library Bldg 35, Rm 319. Structured Plan → Find → Apply → Pre-Departure process with peer advisors."
-  },
-
-  // ---------------- More Transportation ----------------
-  {
-    title: "Zipcar at Cal Poly",
-    category: "Transportation",
-    tags: ["travel"],
-    desc: "9 Zipcars parked at campus locations including the Grand Ave Parking Structure — gas, insurance, and maintenance included.",
-    cost: "$",
-    link: "https://afd.calpoly.edu/parking/slo/commuting-to-campus/zipcar",
-    note: "$25/year student membership; rates from $8.75/hour or $72/day. Ages 18–20 get campus-only access; 21+ get nationwide access."
-  },
-
-  // ---------------- More Discounts ----------------
-  {
-    title: "Foothill Cyclery Student Discount",
-    category: "Discounts & Deals",
-    tags: ["outdoors"],
-    desc: "10% off all parts and accessories for Cal Poly and Cuesta students — just give them your school email.",
-    cost: "Discount",
-    link: "https://www.foothillcyclery.com/students",
-    note: null
-  },
-  {
-    title: "SLO Beauty College",
-    category: "Discounts & Deals",
-    tags: ["wellness"],
-    desc: "A student-run cosmetology school with genuinely cheap services: $8 haircuts, $8 manicures, $15 pedicures, $25 facials.",
-    cost: "$",
-    link: "https://slobeautycollege.com/salon-services/",
-    note: "Not a student-specific discount — just cheap for everyone."
-  },
-  {
-    title: "Palm Theatre Student Thursdays",
-    category: "Discounts & Deals",
-    tags: ["arts"],
-    desc: "$10 student tickets on Thursdays at the Palm Theatre / SLO Film Center (general is $12 after 5pm).",
-    cost: "Discount",
-    link: "https://thepalmtheatre.com/faq-and-accessibility/",
-    note: "Also has a $9 Bargain Monday for everyone."
-  },
-  {
-    title: "BA Start Arcade & Taproom",
-    category: "Discounts & Deals",
-    tags: ["social"],
-    desc: "50+ retro and modern arcade games plus pool and pinball downtown — no cover charge, $3 draft beers.",
-    cost: "$",
-    link: "https://www.bastartarcadebar.com/",
-    note: "21+ after 9pm Thu–Sat."
-  },
-  {
-    title: "History Center of SLO County",
-    category: "Discounts & Deals",
-    tags: ["arts", "free"],
-    desc: "Always-free admission (suggested donation) on Monterey St.",
-    cost: "Free",
-    link: "https://www.historycenterslo.org/",
-    note: null
-  },
-  {
-    title: "1901 Marketplace",
-    category: "Food & Local Spots",
-    tags: ["food"],
-    desc: "A newer (2024) on-campus dining hub with 8 venues under one roof: 1901 Kitchen, Chick-fil-A, Panda Express, Pico's, PolyChoice, Pom & Honey, Red Radish, and Shake Smart.",
-    cost: "$",
-    link: null,
-    note: "Recent enough that some students still don't know it exists."
-  },
-
-  // ---------------- More Outdoors & Hikes ----------------
-  {
-    title: "Righetti Hill Open Space",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A brand-new open space (opened May 2025) — 51 acres, 2+ miles of trails, and a Quarry Trail to a 563-ft summit with 360° views of Cerro San Luis, Bishop Peak, and Islay Hill.",
-    cost: "Free",
-    link: null,
-    note: "Genuinely new enough that most current students don't know about it yet. Trailhead at Hillside Dr & Twin Creek Rd."
-  },
-  {
-    title: "Irish Hills Natural Reserve",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "720 acres and 8+ miles of trails — the Morro View Trail is 3.15 miles round trip with 850 ft of gain from the Prefumo Canyon trailhead.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Cerro Cabrillo",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A 2.3-mile out-and-back near Morro Bay with a steep rock-scramble finish and 360° views. Trailhead on South Bay Blvd across from the Morro Estuary.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Eagle Rock Nature Trail",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A 2.4-mile loop in El Chorro Regional Park, about 450 ft of gain and an hour round trip, past the botanical garden and dog park.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Cuesta Ridge Botanical Area",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A 6-mile round trip through a rare Sargent cypress \"elfin forest\" with views of 8 of the Nine Sisters — best in May–June for wildflowers.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Bob Jones Trail (\"City to the Sea\")",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A paved, flat, family-friendly trail — about 6 miles round trip from Ontario Rd to the Avila Beach Promenade along SLO Creek.",
-    cost: "Free",
-    link: null,
-    note: "The easiest option on this whole list if you just want a flat walk or bike ride."
-  },
-  {
-    title: "Pecho Coast Trail → Point San Luis Lighthouse",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "travel"],
-    desc: "A 3.75-mile round trip, moderate to strenuous — but guided-only via PG&E docents, Wednesdays and Saturdays.",
-    cost: "$",
-    link: "https://www.pointsanluislighthouse.org/hiking",
-    note: "Reserve at least 2 weeks ahead (805-528-8758). Optional $10 lighthouse tour add-on."
-  },
-  {
-    title: "Elfin Forest Natural Preserve",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A 1-mile ADA-accessible boardwalk loop in Los Osos, only 80 ft of gain, with views of Morro Bay, Hollister Peak, and Cerro Cabrillo.",
-    cost: "Free",
-    link: null,
-    note: "The most accessible hike on this list — genuinely wheelchair-friendly."
-  },
-  {
-    title: "Laguna Lake Park",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A 375-acre park with options from an easy 2.3-mile loop up to a strenuous connector all the way to the Cerro San Luis summit. Off-leash dog park on site.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-
-  // ---------------- Real Talk additions ----------------
-  {
-    title: "E-Scooters: They Don't Exist Here",
-    category: "Real Talk: Skip It",
-    tags: ["travel"],
-    desc: "Don't waste time looking for Lime or Bird — SLO has repeatedly and explicitly blocked dockless e-scooter companies from operating in the city (most recently reported again in 2023).",
-    cost: "Free",
-    link: null,
-    note: "A 2019 city-approved bike-share pilot also never actually launched."
-  },
-  {
-    title: "Hollister Peak: You Can't Hike This One",
-    category: "Real Talk: Skip It",
-    tags: ["outdoors"],
-    desc: "It looks like an obvious hike from the highway, but Hollister Peak is private property with no legal public access — only occasional docent-led hikes via The Land Conservancy.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "Downtown Centre Cinema — Currently Closed",
-    category: "Real Talk: Skip It",
-    tags: ["arts"],
-    desc: "The historic $6 Discount Tuesday / $10 Sunday College Night deals are real, but the theater has been closed for renovation since early 2026 — don't show up expecting it to be open.",
-    cost: "Free",
-    link: null,
-    note: "Reportedly expected to reopen around the holidays in 2026 — verify before planning around it."
-  },
-
-  // ---------------- More Hidden Gems (Instagram / LocalWiki / KCPR) ----------------
-  {
-    title: "@slo.underground — Free All-Ages Local Shows",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["arts", "social", "free"],
-    desc: "An Instagram account posting free, all-ages local music shows around SLO — a real option for students who can't get into 21+ venues.",
-    cost: "Free",
-    link: null,
-    note: "This account reportedly took over after @slo.diy shut down — if an older guide points you to slo.diy, it's stale."
-  },
-  {
-    title: "The Bunker / MPU Underground Shows",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["arts", "social"],
-    desc: "A student-run underground music scene (Music Production Union) hosting small, cheap local shows — a different vibe from the mainstream campus events calendar.",
-    cost: "$",
-    link: null,
-    note: "Watch @slo.underground and campus club Instagram accounts for current show listings — dates rotate."
-  },
-  {
-    title: "Club Fundraiser House Shows",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["arts", "social", "community"],
-    desc: "Cal Poly clubs like Engineers Without Borders occasionally run house-show fundraisers with live bands, cash or Venmo entry, and snacks — proceeds go straight to the club.",
-    cost: "$",
-    link: null,
-    note: "Follow club Instagram accounts directly — these aren't listed anywhere central."
-  },
-  {
-    title: "Cal Poly Unicycle Club",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["community", "fitness", "free"],
-    desc: "Yes, this is a real, active club (@cpunicycle) that hosts flatland competitions — about as niche and unexpected as Cal Poly clubs get.",
-    cost: "Free",
-    link: null,
-    note: null
-  },
-  {
-    title: "CPSalsa Beginner Dance Nights",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["social", "fitness"],
-    desc: "Weekly bachata and salsa nights in Building 5, Room 225 — no experience or partner required, mixer included.",
-    cost: "$",
-    link: null,
-    note: "⚠️ One flyer showed conflicting student prices ($4 in the caption vs $7 on the image) — confirm the actual price with organizers before assuming either."
-  },
-  {
-    title: "Lemon Grove–Rock Garden Loop",
-    category: "Outdoors & Hikes",
-    tags: ["outdoors", "free"],
-    desc: "A roughly 4-mile loop starting at the Lemon Grove trailhead on Fernandez Lane, with an alternate approach from the Madonna Mountain side.",
-    cost: "Free",
-    link: null,
-    note: "Recommended in Her Campus Cal Poly's student-written hiking guide."
-  },
-  {
-    title: "Community Fruit Tree Maps",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["free", "food", "outdoors"],
-    desc: "SLO's community LocalWiki maintains maps of public fruit trees around town — loquats, figs, pineapple guava, persimmons, kumquats, avocados, and apples.",
-    cost: "Free",
-    link: null,
-    note: "Genuinely unique local knowledge — individual trees' access and ripeness will vary, so check before a special trip."
-  },
-  {
-    title: "Neighborhood Little Free Libraries",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["free", "academic"],
-    desc: "Community-run book boxes around town, including ones at Mill & Toro, Broad & Pacific, and near Grand & Monterey.",
-    cost: "Free",
-    link: null,
-    note: "Based on an older community inventory — locations can change."
-  },
-  {
-    title: "Bike Night (First Thursday)",
-    category: "Day Trips & Traditions",
-    tags: ["social", "outdoors", "free"],
-    desc: "A monthly community bike ride on the first Thursday of the month, right after the Farmers' Market wraps up — a free, low-key social alternative to bar-hopping.",
-    cost: "Free",
-    link: null,
-    note: "Reported on by KCPR, Cal Poly's student radio station."
-  },
-  {
-    title: "\"Deep Dark\" Creek Tunnel",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["community"],
-    desc: "A creek tunnel running under downtown SLO with its own graffiti and local lore, documented on SLO's community LocalWiki.",
-    cost: "Free",
-    link: null,
-    note: "This is local folklore, not a vetted hiking spot — current permitted access is unconfirmed, so treat it as a story to know, not an itinerary to follow."
-  },
-
-  // ---------------- More Local Food Finds ----------------
-  {
-    title: "Honeymoon Cafe (Pismo)",
-    category: "Local Food Finds (Community Intel)",
-    tags: ["food", "travel"],
-    desc: "A Pismo cafe on Price Street — the cowboy burrito and jackfruit banh mi bowl are the specific student-recommended orders.",
-    cost: "$",
-    link: null,
-    note: null
-  },
-  {
-    title: "Cal Poly Creamery Friday Drive-Through",
-    category: "Local Food Finds (Community Intel)",
-    tags: ["food"],
-    desc: "Most Fridays, noon–4pm: student-made ice cream (single scoop $6, double $8, pints $9), a $12 cheese \"Odds & Ends\" box, plus student-made summer sausage and chocolate.",
-    cost: "$",
-    link: null,
-    note: "Check the Creamery's current page before going — hours are \"most Fridays,\" not guaranteed every week."
-  },
-
-  // ---------------- More Underused Resources ----------------
-  {
-    title: "SLO County Library Card → Free MakerSpace Hours",
-    category: "Creative & Maker Spaces",
-    tags: ["free", "tech", "arts"],
-    desc: "A free SLO County library card unlocks up to 15 free hours a week at SLO MakerSpace — woodworking, metalworking, pottery, electronics, and 3D printing.",
-    cost: "Free",
-    link: null,
-    note: "Materials aren't included, and some equipment needs a separate paid certification — confirm current hours with the library FAQ."
-  },
-  {
-    title: "Library of Things",
-    category: "Creative & Maker Spaces",
-    tags: ["free", "tech"],
-    desc: "SLO County Library lends more than books: tool kits (via SLO MakerSpace), board games, sewing/craft supplies, museum passes, and parks passes. The Shandon branch has its own separate power-tool collection.",
-    cost: "Free",
-    link: null,
-    note: "Different items have different pickup requirements — check per item."
-  },
-  {
-    title: "Sharing SLO Community Directory",
-    category: "Hidden Gems (Community Intel)",
-    tags: ["free", "community"],
-    desc: "A community-maintained directory of niche local resources: Table Ware Share (borrow event flatware), the SLO Seed Exchange, the SLO Produce Exchange, slacklining at Meadow Park, and lunchtime bocce at Emerson Park.",
-    cost: "Free",
-    link: null,
-    note: "Community-maintained leads — freshness varies, so double-check before counting on any one of them."
-  },
-  {
-    title: "SLO Little 500",
-    category: "Day Trips & Traditions",
-    tags: ["community", "social"],
-    desc: "A local underground bicycle relay tradition — four-person teams sharing one bicycle, in costume, competing for a trophy teams add to year after year. Announcements are deliberately scattered across social media rather than centrally listed.",
-    cost: "Free",
-    link: null,
-    note: "Documented by New Times SLO as a genuine local subculture worth knowing about."
-  },
-
-  // ---------------- Campus Life Reality Check ----------------
-  {
-    title: "Communal Laundry Frustrations (PCV)",
-    category: "Know Before You Register",
-    tags: ["community"],
-    desc: "A recurring complaint in campus social media: clothes pulled out of shared dryers by other residents while still wet, sometimes with real time left on the cycle.",
-    cost: "Free",
-    link: null,
-    note: "Set a phone timer and try to be back right when your cycle ends — a common workaround students mention."
+    link: "http://washalert.washlaundry.com/washalertweb/calpoly/cal-poly.html",
+    note: "Also available as the WASH Connect mobile app."
   }
 ];
