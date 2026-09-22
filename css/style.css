@@ -174,10 +174,9 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   align-items: center;
   margin: 0 -20px 18px;
   padding: 14px 20px;
-  background: rgba(11, 21, 16, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
 }
 .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .filter-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-right: 4px; font-weight: 700; }
