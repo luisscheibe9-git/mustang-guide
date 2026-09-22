@@ -27,7 +27,11 @@
       <input type="text" id="search-input" placeholder="Search — “camping gear,” “free food,” “hikes”…" autocomplete="off">
     </div>
     <div class="stats" id="stats"></div>
-    <a class="suggest-link" href="mailto:lscheibe@calpoly.edu?subject=Mustang%20Guide%20suggestion&body=I%20think%20you%20should%20add%3A%0A%0A">Suggest something to add &rarr;</a>
+    <div class="hero-links">
+      <button type="button" class="suggest-link hero-btn-reset" id="surprise-btn">Surprise me &rarr;</button>
+      <span class="hero-links-sep"></span>
+      <a class="suggest-link" href="mailto:lscheibe@calpoly.edu?subject=Mustang%20Guide%20suggestion&body=I%20think%20you%20should%20add%3A%0A%0A">Suggest something to add &rarr;</a>
+    </div>
   </div>
 </header>
 
@@ -38,6 +42,7 @@
       <input type="range" id="cost-slider" min="0" max="3" step="1" value="3">
       <span class="cost-slider-label" id="cost-slider-label">Any price</span>
     </div>
+    <button type="button" class="chip bucket-nav-btn" id="bucket-nav-btn">My Bucket List <span id="bucket-nav-count"></span></button>
     <button class="chip clear-chip" id="btn-clear-filters">Clear all</button>
   </div>
 
