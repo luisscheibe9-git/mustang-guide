@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mustang Guide</title>
+<meta name="description" content="Every rental, discount, class, and SLO experience Cal Poly students should actually use — searchable, filterable, all in one place.">
+<meta name="theme-color" content="#0d1912">
+<link rel="icon" href="icons/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">FOR CAL POLY STUDENTS</p>
+    <h1>Mustang Guide<span class="dot">.</span></h1>
+    <p class="tagline">Every rental, discount, class, and SLO experience you're paying for and not using — in one searchable place.</p>
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Search — “camping gear,” “free food,” “hikes”…" autocomplete="off">
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<main>
+  <div class="filter-bar">
+    <div class="filter-group" id="interest-filters">
+      <span class="filter-label">Interests</span>
+    </div>
+    <div class="filter-group" id="cost-filters">
+      <span class="filter-label">Cost</span>
+      <button class="chip cost-chip" data-cost="all">All</button>
+      <button class="chip cost-chip" data-cost="Free">Free</button>
+      <button class="chip cost-chip" data-cost="$">$ Cheap</button>
+      <button class="chip cost-chip" data-cost="$$">$$</button>
+    </div>
+    <button class="chip clear-chip" id="btn-clear-filters">Clear filters</button>
+  </div>
+
+  <nav class="category-nav" id="category-nav"></nav>
+
+  <div id="empty-state" class="empty-state" style="display:none;">
+    <p>Nothing matches that. Try clearing filters or searching something broader.</p>
+  </div>
+
+  <div id="sections"></div>
+</main>
+
+<footer class="site-footer">
+  <p>Built by a Cal Poly student, for Cal Poly students. Something wrong or missing? This list is meant to grow.</p>
+</footer>
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
