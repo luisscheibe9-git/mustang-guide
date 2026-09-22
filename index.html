@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -30,16 +30,6 @@
 
 <main>
   <div class="filter-bar">
-    <div class="filter-group interest-filter" id="interest-filter-wrap">
-      <button type="button" class="chip interest-toggle" id="interest-toggle">
-        <span id="interest-toggle-label">Filter by interest</span>
-        <span class="interest-caret">&#9662;</span>
-      </button>
-      <div class="interest-dropdown" id="interest-dropdown">
-        <div class="interest-list" id="interest-list"></div>
-        <button type="button" class="interest-clear-btn" id="interest-clear">Clear interests</button>
-      </div>
-    </div>
     <div class="filter-group cost-slider-group">
       <span class="filter-label">Cost</span>
       <input type="range" id="cost-slider" min="0" max="3" step="1" value="3">
@@ -48,13 +38,19 @@
     <button class="chip clear-chip" id="btn-clear-filters">Clear all</button>
   </div>
 
-  <nav class="category-nav" id="category-nav"></nav>
+  <div class="browse-wrap" id="browse-wrap">
+    <div class="browse-toggle" id="browse-toggle">
+      <button type="button" class="browse-toggle-btn active" data-root="category">Browse by category</button>
+      <button type="button" class="browse-toggle-btn" data-root="interest">Browse by interest</button>
+    </div>
+    <div class="tree" id="tree"></div>
+  </div>
 
   <div id="empty-state" class="empty-state" style="display:none;">
     <p>Nothing matches that. Try clearing filters or searching something broader.</p>
   </div>
 
-  <div id="sections"></div>
+  <div id="results"></div>
 </main>
 
 <footer class="site-footer">
