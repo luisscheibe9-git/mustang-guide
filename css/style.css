@@ -187,8 +187,71 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   border-color: var(--green);
   color: #fff;
 }
-.cost-chip.active { background: var(--gold); border-color: var(--gold-dark); color: #1a1305; }
 .clear-chip { margin-left: auto; background: transparent; border-color: transparent; color: var(--text-dim); text-decoration: underline; }
+
+/* ---------- Interest dropdown ---------- */
+.interest-filter { position: relative; }
+.interest-toggle { display: flex; align-items: center; gap: 8px; }
+.interest-caret { font-size: 10px; color: var(--text-dim); }
+.interest-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 25;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.25);
+  padding: 14px;
+  width: min(360px, 84vw);
+}
+.interest-dropdown.open { display: block; }
+.interest-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 10px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.interest-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text);
+  padding: 6px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.interest-row:hover { background: var(--bg-alt); }
+.interest-row input { accent-color: var(--green); width: 16px; height: 16px; cursor: pointer; }
+.interest-clear-btn {
+  margin-top: 10px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  text-decoration: underline;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  padding: 4px 0 0;
+}
+
+/* ---------- Cost slider ---------- */
+.cost-slider-group { gap: 10px; }
+#cost-slider {
+  width: 140px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+.cost-slider-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  min-width: 72px;
+}
 
 /* ---------- Category nav ---------- */
 .category-nav {
@@ -350,6 +413,12 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   transition: background 0.15s ease;
 }
 .modal .btn-link:hover { background: var(--green-mid); }
+.modal .btn-link-alt {
+  background: #fff;
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+.modal .btn-link-alt:hover { background: var(--bg-alt); }
 
 /* ---------- Back to top ---------- */
 #back-to-top {
