@@ -56,7 +56,9 @@
     mode: "browse",        // "browse" | "bucketlist"
     expandedBranch: null,  // branch name open in category mode
     activeCategory: null,  // selected leaf category
-    activeInterest: null   // selected leaf interest
+    activeInterest: null,  // selected leaf interest
+    renamingListId: null,      // list currently showing an inline rename field
+    confirmDeleteListId: null  // list currently showing the inline delete confirmation
   };
 
   // ---------------- Bucket list persistence ----------------
@@ -64,18 +66,26 @@
   function loadBucketState() {
     try {
       const raw = localStorage.getItem(BUCKET_STORAGE_KEY);
-      if (!raw) return { done: new Set(), custom: new Set() };
+      if (!raw) return { done: new Set(), lists: [] };
       const parsed = JSON.parse(raw);
-      return { done: new Set(parsed.done || []), custom: new Set(parsed.custom || []) };
+      let lists = parsed.lists;
+      if (!lists && parsed.custom) {
+        // migrate from the old single unnamed "custom" list
+        lists = parsed.custom.length ? [{ id: "list-legacy", name: "My List", items: parsed.custom }] : [];
+      }
+      return {
+        done: new Set(parsed.done || []),
+        lists: (lists || []).map((l) => ({ id: l.id, name: l.name, items: l.items || [] }))
+      };
     } catch (e) {
-      return { done: new Set(), custom: new Set() };
+      return { done: new Set(), lists: [] };
     }
   }
   function saveBucketState() {
     try {
       localStorage.setItem(BUCKET_STORAGE_KEY, JSON.stringify({
         done: [...bucketState.done],
-        custom: [...bucketState.custom]
+        lists: bucketState.lists
       }));
     } catch (e) {
       // localStorage unavailable — bucket list just won't persist this session
@@ -87,9 +97,32 @@
     else bucketState.done.add(title);
     saveBucketState();
   }
-  function toggleCustomList(title) {
-    if (bucketState.custom.has(title)) bucketState.custom.delete(title);
-    else bucketState.custom.add(title);
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function createList(name) {
+    const id = "list-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+    bucketState.lists.push({ id, name: name.trim() || "Untitled list", items: [] });
+    saveBucketState();
+    return id;
+  }
+  function renameList(id, name) {
+    const list = bucketState.lists.find((l) => l.id === id);
+    if (list && name.trim()) {
+      list.name = name.trim();
+      saveBucketState();
+    }
+  }
+  function deleteList(id) {
+    bucketState.lists = bucketState.lists.filter((l) => l.id !== id);
+    saveBucketState();
+  }
+  function toggleItemInList(listId, title) {
+    const list = bucketState.lists.find((l) => l.id === listId);
+    if (!list) return;
+    const idx = list.items.indexOf(title);
+    if (idx === -1) list.items.push(title);
+    else list.items.splice(idx, 1);
     saveBucketState();
   }
 
@@ -205,6 +238,8 @@
     state.mode = "browse";
     state.activeCategory = null;
     state.activeInterest = null;
+    state.renamingListId = null;
+    state.confirmDeleteListId = null;
     updateBucketNavBtn();
     renderTree();
     renderResults();
@@ -301,29 +336,126 @@
     section1.appendChild(grid1);
     container.appendChild(section1);
 
-    const customItems = RESOURCES.filter((r) => bucketState.custom.has(r.title));
-    const section2 = document.createElement("div");
-    section2.className = "bucket-section";
-    if (customItems.length === 0) {
-      section2.innerHTML = `
-        <div class="bucket-section-head"><h2>My List</h2></div>
-        <p class="bucket-section-sub">Nothing here yet — open anything on the site and click "Add to my list."</p>
-      `;
-    } else {
-      const doneCustom = customItems.filter((r) => bucketState.done.has(r.title)).length;
-      section2.innerHTML = `
-        <div class="bucket-section-head">
-          <h2>My List</h2>
-          <span class="bucket-progress-label">${doneCustom} of ${customItems.length} done</span>
-        </div>
-      `;
-      const grid2 = document.createElement("div");
-      grid2.className = "card-grid";
-      grid2.style.marginTop = "18px";
-      customItems.forEach((item) => grid2.appendChild(buildCard(item)));
-      section2.appendChild(grid2);
+    renderMyLists(container);
+  }
+
+  function renderMyLists(container) {
+    const head = document.createElement("div");
+    head.className = "bucket-section";
+    head.innerHTML = `
+      <div class="bucket-section-head"><h2>My Lists</h2></div>
+      <p class="bucket-section-sub">Start your own list from scratch and name it whatever you want.</p>
+      <div class="new-list-row">
+        <input type="text" class="new-list-input" id="new-list-input" placeholder="Name a new list…" maxlength="60">
+        <button type="button" class="chip new-list-btn" id="new-list-btn">+ Start new list</button>
+      </div>
+    `;
+    container.appendChild(head);
+
+    document.getElementById("new-list-btn").addEventListener("click", () => {
+      const input = document.getElementById("new-list-input");
+      const name = input.value.trim();
+      if (!name) { input.focus(); return; }
+      createList(name);
+      renderResults();
+    });
+    document.getElementById("new-list-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("new-list-btn").click();
+    });
+
+    if (bucketState.lists.length === 0) {
+      const hint = document.createElement("p");
+      hint.className = "bucket-section-sub";
+      hint.textContent = "You haven't started a list yet.";
+      container.appendChild(hint);
+      return;
     }
-    container.appendChild(section2);
+
+    bucketState.lists.forEach((list) => {
+      const items = RESOURCES.filter((r) => list.items.includes(r.title));
+      const doneCount = items.filter((r) => bucketState.done.has(r.title)).length;
+      const isRenaming = state.renamingListId === list.id;
+      const isConfirmingDelete = state.confirmDeleteListId === list.id;
+
+      const nameHtml = isRenaming
+        ? `<input type="text" class="list-rename-input" id="rename-input-${list.id}" value="${escapeHtml(list.name)}" maxlength="60">`
+        : `<h2>${escapeHtml(list.name)}</h2>`;
+
+      const actionsHtml = isConfirmingDelete
+        ? `<span class="list-confirm-text">Delete this list?</span>
+           <button type="button" class="list-action-btn list-action-danger" data-action="confirm-delete" data-list-id="${list.id}">Yes, delete</button>
+           <button type="button" class="list-action-btn" data-action="cancel-delete" data-list-id="${list.id}">Cancel</button>`
+        : isRenaming
+        ? `<button type="button" class="list-action-btn" data-action="save-rename" data-list-id="${list.id}">Save</button>
+           <button type="button" class="list-action-btn" data-action="cancel-rename" data-list-id="${list.id}">Cancel</button>`
+        : `<button type="button" class="list-action-btn" data-action="rename" data-list-id="${list.id}">Rename</button>
+           <button type="button" class="list-action-btn list-action-danger" data-action="delete" data-list-id="${list.id}">Delete list</button>`;
+
+      const section = document.createElement("div");
+      section.className = "bucket-section";
+      section.innerHTML = `
+        <div class="bucket-section-head">
+          ${nameHtml}
+          <span class="bucket-progress-label">${items.length ? `${doneCount} of ${items.length} done` : ""}</span>
+        </div>
+        <div class="list-actions">${actionsHtml}</div>
+      `;
+      if (items.length === 0) {
+        const hint = document.createElement("p");
+        hint.className = "bucket-section-sub";
+        hint.textContent = "No items yet — add some from anywhere on the site.";
+        section.appendChild(hint);
+      } else {
+        const grid = document.createElement("div");
+        grid.className = "card-grid";
+        grid.style.marginTop = "18px";
+        items.forEach((item) => grid.appendChild(buildCard(item)));
+        section.appendChild(grid);
+      }
+      container.appendChild(section);
+    });
+
+    container.querySelectorAll(".list-action-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.listId;
+        const action = btn.dataset.action;
+        if (action === "rename") {
+          state.renamingListId = id;
+          state.confirmDeleteListId = null;
+        } else if (action === "cancel-rename") {
+          state.renamingListId = null;
+        } else if (action === "save-rename") {
+          const input = document.getElementById(`rename-input-${id}`);
+          if (input && input.value.trim()) renameList(id, input.value);
+          state.renamingListId = null;
+        } else if (action === "delete") {
+          state.confirmDeleteListId = id;
+          state.renamingListId = null;
+        } else if (action === "cancel-delete") {
+          state.confirmDeleteListId = null;
+        } else if (action === "confirm-delete") {
+          deleteList(id);
+          state.confirmDeleteListId = null;
+        }
+        renderResults();
+      });
+    });
+
+    const renameInput = container.querySelector(".list-rename-input");
+    if (renameInput) {
+      renameInput.focus();
+      renameInput.select();
+      renameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const id = renameInput.id.replace("rename-input-", "");
+          const saveBtn = container.querySelector(`[data-action="save-rename"][data-list-id="${id}"]`);
+          if (saveBtn) saveBtn.click();
+        } else if (e.key === "Escape") {
+          state.renamingListId = null;
+          renderResults();
+        }
+      });
+    }
   }
 
   // ---------------- Results ----------------
@@ -398,7 +530,10 @@
     const backdrop = document.getElementById("modal-backdrop");
     const modal = document.getElementById("modal");
     const done = bucketState.done.has(item.title);
-    const inList = bucketState.custom.has(item.title);
+    const listRows = bucketState.lists.map((list) => {
+      const checked = list.items.includes(item.title);
+      return `<label class="modal-list-row"><input type="checkbox" data-list-id="${list.id}" ${checked ? "checked" : ""}> <span>${escapeHtml(list.name)}</span></label>`;
+    }).join("");
     modal.innerHTML = `
       <button class="modal-close" id="modal-close">&times;</button>
       <div class="modal-cat">${item.category}</div>
@@ -411,7 +546,14 @@
       </div>
       <div class="modal-bucket-actions">
         <button type="button" class="btn-bucket ${done ? "active" : ""}" id="modal-toggle-done">${done ? "&#10003; Done" : "Mark as done"}</button>
-        <button type="button" class="btn-bucket-outline ${inList ? "active" : ""}" id="modal-toggle-list">${inList ? "&minus; Remove from my list" : "+ Add to my list"}</button>
+      </div>
+      <div class="modal-lists-section">
+        <div class="modal-lists-label">${bucketState.lists.length ? "Add to a list" : "You don't have any lists yet"}</div>
+        ${listRows ? `<div class="modal-lists-checklist">${listRows}</div>` : ""}
+        <div class="modal-new-list-row">
+          <input type="text" class="modal-new-list-input" id="modal-new-list-input" placeholder="Start a new list…" maxlength="60">
+          <button type="button" class="chip" id="modal-new-list-btn">+ Create</button>
+        </div>
       </div>
     `;
     backdrop.classList.add("active");
@@ -422,10 +564,23 @@
       updateBucketNavBtn();
       renderResults();
     });
-    document.getElementById("modal-toggle-list").addEventListener("click", () => {
-      toggleCustomList(item.title);
+    modal.querySelectorAll(".modal-list-row input[type=checkbox]").forEach((cb) => {
+      cb.addEventListener("change", () => {
+        toggleItemInList(cb.dataset.listId, item.title);
+        renderResults();
+      });
+    });
+    document.getElementById("modal-new-list-btn").addEventListener("click", () => {
+      const input = document.getElementById("modal-new-list-input");
+      const name = input.value.trim();
+      if (!name) { input.focus(); return; }
+      const id = createList(name);
+      toggleItemInList(id, item.title);
       openModal(item);
       renderResults();
+    });
+    document.getElementById("modal-new-list-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("modal-new-list-btn").click();
     });
   }
   function closeModal() {
