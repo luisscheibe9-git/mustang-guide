@@ -46,7 +46,7 @@
     "Poly Royal Rodeo",
     "Open House (Poly Royal)",
     "Einstein Statue",
-    "SLO Little 500"
+    "Bike Night (First Thursday)"
   ];
 
   const state = {
@@ -124,6 +124,65 @@
     if (idx === -1) list.items.push(title);
     else list.items.splice(idx, 1);
     saveBucketState();
+  }
+
+  // ---------------- Completion ring ----------------
+  function buildProgressRing(done, total) {
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    const r = 24;
+    const c = 2 * Math.PI * r;
+    const offset = c * (1 - pct / 100);
+    return `
+      <svg class="progress-ring${pct >= 100 && total ? " complete" : ""}" width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r="${r}" fill="none" stroke="#dddcd7" stroke-width="6"/>
+        <circle cx="28" cy="28" r="${r}" fill="none" stroke="#c69214" stroke-width="6"
+          stroke-dasharray="${c}" stroke-dashoffset="${offset}"
+          stroke-linecap="round" transform="rotate(-90 28 28)"/>
+        <text x="28" y="32" text-anchor="middle" class="progress-ring-text">${pct}%</text>
+      </svg>
+    `;
+  }
+
+  // ---------------- Confetti ----------------
+  function fireConfetti(x, y, count) {
+    const colors = ["#c69214", "#154734", "#36863a", "#ffffff", "#b88813"];
+    const container = document.createElement("div");
+    container.className = "confetti-container";
+    document.body.appendChild(container);
+    for (let i = 0; i < count; i++) {
+      const piece = document.createElement("span");
+      piece.className = "confetti-piece";
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 60 + Math.random() * 160;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance - 40;
+      const rotate = Math.random() * 720 - 360;
+      piece.style.left = x + "px";
+      piece.style.top = y + "px";
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.setProperty("--dx", dx + "px");
+      piece.style.setProperty("--dy", dy + "px");
+      piece.style.setProperty("--rot", rotate + "deg");
+      piece.style.animationDelay = (Math.random() * 0.15) + "s";
+      container.appendChild(piece);
+    }
+    setTimeout(() => container.remove(), 1500);
+  }
+
+  // Returns the ids of every list ("mustdo" or a custom list id) that just
+  // reached 100% completion because `title` was marked done.
+  function listsJustCompletedBy(title) {
+    const completed = [];
+    const mustDoItems = RESOURCES.filter((r) => MUST_DO_TITLES.includes(r.title));
+    if (MUST_DO_TITLES.includes(title) && mustDoItems.length && mustDoItems.every((r) => bucketState.done.has(r.title))) {
+      completed.push("mustdo");
+    }
+    bucketState.lists.forEach((list) => {
+      if (list.items.includes(title) && list.items.length && list.items.every((t) => bucketState.done.has(t))) {
+        completed.push(list.id);
+      }
+    });
+    return completed;
   }
 
   function costClass(cost) {
@@ -317,17 +376,18 @@
 
     const mustDoItems = RESOURCES.filter((r) => MUST_DO_TITLES.includes(r.title));
     const doneMustDo = mustDoItems.filter((r) => bucketState.done.has(r.title)).length;
-    const pct = mustDoItems.length ? Math.round((doneMustDo / mustDoItems.length) * 100) : 0;
 
     const section1 = document.createElement("div");
     section1.className = "bucket-section";
     section1.innerHTML = `
       <div class="bucket-section-head">
-        <h2>The Cal Poly Bucket List</h2>
+        <div class="bucket-head-left">
+          ${buildProgressRing(doneMustDo, mustDoItems.length)}
+          <h2>The Cal Poly Bucket List</h2>
+        </div>
         <span class="bucket-progress-label">${doneMustDo} of ${mustDoItems.length} done</span>
       </div>
       <p class="bucket-section-sub">The things every Mustang should do before they graduate. Click one, then "Mark as done."</p>
-      <div class="bucket-progress-bar"><div class="bucket-progress-fill" style="width:${pct}%"></div></div>
     `;
     const grid1 = document.createElement("div");
     grid1.className = "card-grid";
@@ -379,7 +439,7 @@
 
       const nameHtml = isRenaming
         ? `<input type="text" class="list-rename-input" id="rename-input-${list.id}" value="${escapeHtml(list.name)}" maxlength="60">`
-        : `<h2>${escapeHtml(list.name)}</h2>`;
+        : `<div class="bucket-head-left">${buildProgressRing(doneCount, items.length)}<h2>${escapeHtml(list.name)}</h2></div>`;
 
       const actionsHtml = isConfirmingDelete
         ? `<span class="list-confirm-text">Delete this list?</span>
@@ -558,8 +618,19 @@
     `;
     backdrop.classList.add("active");
     document.getElementById("modal-close").addEventListener("click", closeModal);
-    document.getElementById("modal-toggle-done").addEventListener("click", () => {
+    document.getElementById("modal-toggle-done").addEventListener("click", (e) => {
+      const wasDone = bucketState.done.has(item.title);
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
       toggleDone(item.title);
+      const justCompletedLists = !wasDone ? listsJustCompletedBy(item.title) : [];
+      if (!wasDone) {
+        fireConfetti(x, y, 26);
+        if (justCompletedLists.length) {
+          setTimeout(() => fireConfetti(window.innerWidth / 2, window.innerHeight * 0.25, 110), 300);
+        }
+      }
       openModal(item);
       updateBucketNavBtn();
       renderResults();
