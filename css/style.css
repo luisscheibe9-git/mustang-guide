@@ -451,7 +451,7 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
 .bucket-section { margin-bottom: 46px; }
 .bucket-section-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
@@ -466,17 +466,35 @@ main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
   text-transform: uppercase;
   color: var(--green);
 }
+.bucket-head-left { display: flex; align-items: center; gap: 14px; }
 .bucket-progress-label { color: var(--text-dim); font-size: 14px; font-weight: 600; }
 .bucket-section-sub { color: var(--text-dim); font-size: 14px; margin: 12px 0 0; }
-.bucket-progress-bar {
-  margin-top: 12px;
-  height: 8px;
-  border-radius: 20px;
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  overflow: hidden;
+
+.progress-ring { flex-shrink: 0; }
+.progress-ring-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--green);
 }
-.bucket-progress-fill { height: 100%; background: var(--gold); border-radius: 20px; transition: width 0.3s ease; }
+.progress-ring.complete circle:nth-of-type(2) { stroke: var(--green-bright); }
+.progress-ring.complete .progress-ring-text { fill: var(--green-bright); }
+
+/* ---------- Confetti ---------- */
+.confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 200; overflow: hidden; }
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 2px;
+  opacity: 1;
+  animation: confetti-burst 1.2s ease-out forwards;
+}
+@keyframes confetti-burst {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx), calc(var(--dy) + 240px)) rotate(var(--rot)); opacity: 0; }
+}
 
 .new-list-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
 .new-list-input {
