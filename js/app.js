@@ -395,8 +395,6 @@
     mustDoItems.forEach((item) => grid1.appendChild(buildCard(item)));
     section1.appendChild(grid1);
     container.appendChild(section1);
-
-    renderMyLists(container);
   }
 
   function renderMyLists(container) {
@@ -590,10 +588,6 @@
     const backdrop = document.getElementById("modal-backdrop");
     const modal = document.getElementById("modal");
     const done = bucketState.done.has(item.title);
-    const listRows = bucketState.lists.map((list) => {
-      const checked = list.items.includes(item.title);
-      return `<label class="modal-list-row"><input type="checkbox" data-list-id="${list.id}" ${checked ? "checked" : ""}> <span>${escapeHtml(list.name)}</span></label>`;
-    }).join("");
     modal.innerHTML = `
       <button class="modal-close" id="modal-close">&times;</button>
       <div class="modal-cat">${item.category}</div>
@@ -606,14 +600,6 @@
       </div>
       <div class="modal-bucket-actions">
         <button type="button" class="btn-bucket ${done ? "active" : ""}" id="modal-toggle-done">${done ? "&#10003; Done" : "Mark as done"}</button>
-      </div>
-      <div class="modal-lists-section">
-        <div class="modal-lists-label">${bucketState.lists.length ? "Add to a list" : "You don't have any lists yet"}</div>
-        ${listRows ? `<div class="modal-lists-checklist">${listRows}</div>` : ""}
-        <div class="modal-new-list-row">
-          <input type="text" class="modal-new-list-input" id="modal-new-list-input" placeholder="Start a new list…" maxlength="60">
-          <button type="button" class="chip" id="modal-new-list-btn">+ Create</button>
-        </div>
       </div>
     `;
     backdrop.classList.add("active");
@@ -634,24 +620,6 @@
       openModal(item);
       updateBucketNavBtn();
       renderResults();
-    });
-    modal.querySelectorAll(".modal-list-row input[type=checkbox]").forEach((cb) => {
-      cb.addEventListener("change", () => {
-        toggleItemInList(cb.dataset.listId, item.title);
-        renderResults();
-      });
-    });
-    document.getElementById("modal-new-list-btn").addEventListener("click", () => {
-      const input = document.getElementById("modal-new-list-input");
-      const name = input.value.trim();
-      if (!name) { input.focus(); return; }
-      const id = createList(name);
-      toggleItemInList(id, item.title);
-      openModal(item);
-      renderResults();
-    });
-    document.getElementById("modal-new-list-input").addEventListener("keydown", (e) => {
-      if (e.key === "Enter") document.getElementById("modal-new-list-btn").click();
     });
   }
   function closeModal() {
